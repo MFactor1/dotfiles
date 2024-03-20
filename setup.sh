@@ -1,9 +1,54 @@
 #!/usr/bin/bash
+if [ -f "../../.zshrc" ]; then
+    echo "Removing existing .zshrc"
+    rm ../../.zshrc
+fi
+
+if [ ! -d "../../.config" ]; then
+    echo "No existing .config folder, creating one"
+    mkdir ../../.config
+fi
+
+if [ -f "../../.config/starship.toml" ]; then
+    echo "Removing existing .config/starship.toml"
+    rm ../../.config/starship.toml
+fi
+
+if [ -f "../../.bashrc" ]; then
+    echo "Removing existing .bashrc"
+    rm ../../.bashrc
+fi
+
+if [ -d "../../.config/warp-terminal" ]; then
+    echo "Removing existing .config/warp-terminal"
+    rm -r ../../.config/warp-terminal
+fi
+
+if [ -d "../../.themes" ]; then
+    echo "Removing existing .themes"
+    rm -r ../../.themes
+fi
+
+if [ -d "../../.vscode" ]; then
+    echo "Removing existing .vscode"
+    rm -r ../../.vscode
+fi
+
+echo "Symlinking .zshrc"
 ln -s gitrepos/dotfiles/.zshrc ../../.zshrc
+
+echo "Symlinking .config/starship.toml"
 ln -s ../gitrepos/dotfiles/starship.toml ../../.config/starship.toml
+
+echo "Symlinking .bashrc"
 ln -s gitrepos/dotfiles/.bashrc ../../.bashrc
+
+echo "Symlinking .config/warp-terminal"
 ln -s ../gitrepos/dotfiles/warp-terminal ../../.config/warp-terminal
-ln -s ../gitrepos/dotfiles/Code ../../.config/Code
+
+echo "Symlinking .themes"
 ln -s gitrepos/dotfiles/.themes ../../.themes
+
+echo "Symlinking .vscode"
 ln -s gitrepos/dotfiles/.vscode ../../.vscode
 
