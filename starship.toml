@@ -1,0 +1,49 @@
+# ~/.config/starship.toml
+
+# Use custom format
+format = """\
+[ matt ](bg:#ED8796 fg:#494D64)\
+[](fg:#ED8796 bg:#494D64)\
+$time\
+[](fg:#494D64 bg:#A5ADCB)\
+$directory\
+[ ](fg:#A5ADCB bg:#24273A)\
+$character
+"""
+
+[directory]
+format = "[ $path ]($style)"
+style = "fg:#494D64 bg:#A5ADCB"
+
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = "  "
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_status]
+format = '[$all_status]($style)'
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
+
+[hg_branch]
+format = "[ $symbol$branch ]($style)"
+symbol = " "
+
+[cmd_duration]
+format = "[  $duration ]($style)"
+style = "fg:bright-white bg:18"
+
+[character]
+success_symbol = '[\$](#A5ADCB)'
+error_symbol = '[ ✗](#E84D44) '
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#494D64"
+format = '[[ zsh ](bg:#494D64 fg:#A5ADCB)]($style)'

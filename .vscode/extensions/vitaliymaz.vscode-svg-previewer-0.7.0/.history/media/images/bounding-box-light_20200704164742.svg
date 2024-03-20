@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>bounding-box</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-10" transform="translate(-24.000000, 0.000000)" fill="#C5C5C5" fill-rule="nonzero">
+            <g id="Group-9">
+                <path d="M26,13 L27,13 L27,14 L37,14 L37,13 L38,13 L38,3 L37,3 L37,2 L27,2 L27,3 L26,3 L26,13 Z M27,15 L27,16 L25,16 C24.4477153,16 24,15.5522847 24,15 L24,13 L25,13 L25,3 L24,3 L24,1 C24,0.44771525 24.4477153,1.01453063e-16 25,0 L27,0 L27,1 L37,1 L37,0 L39,0 C39.5522847,-1.01453063e-16 40,0.44771525 40,1 L40,3 L39,3 L39,13 L40,13 L40,15 C40,15.5522847 39.5522847,16 39,16 L37,16 L37,15 L27,15 Z" id="bounding-box"></path>
+            </g>
+        </g>
+    </g>
+</svg>

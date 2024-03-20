@@ -1,0 +1,59 @@
+{
+	"name": "language-plantuml",
+	"displayName": "PlantUML Syntax",
+	"description": "Language support for PlantUML",
+	"version": "0.0.3",
+	"publisher": "qhoekman",
+	"icon": "images/icon.png",
+	"author": {
+		"name": "Quido Hoekman"
+	},
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Languages"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "plantuml",
+				"extensions": [
+					".pu",
+					".puml",
+					".plantuml"
+				],
+				"aliases": [
+					"PlantUML"
+				]
+			}
+		],
+		"grammars": [
+			{
+				"language": "plantuml",
+				"path": "./syntaxes/plantuml.json",
+				"scopeName": "source.plantuml"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+	},
+	"devDependencies": {
+		"typescript": "^1.6.2",
+		"vscode": "0.10.x"
+	},
+	"__metadata": {
+		"id": "4a8b8bdc-3c1d-4406-8a88-3182bc2fc307",
+		"publisherId": "b8ac8d3a-2d0e-4900-869c-35d73142849f",
+		"publisherDisplayName": "Quido Hoekman",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1710875725809,
+		"pinned": false
+	}
+}

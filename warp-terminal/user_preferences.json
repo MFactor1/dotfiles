@@ -1,0 +1,15 @@
+{
+  "prefs": {
+    "FontName": "\"JetBrainsMono Nerd Font\"",
+    "ReceivedReferralTheme": "\"Inactive\"",
+    "Theme": "{\"Custom\":{\"name\":\"Catppuccin Macchiato\",\"path\":\"/home/matthewnesbitt/.local/share/warp-terminal/themes/catppuccin_macchiato.yml\"}}",
+    "HonorPS1": "true",
+    "Shortcuts": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":2,\"next_refresh_time\":\"2024-03-21T00:23:17.964994Z\"}",
+    "ChangelogVersions": "{\"v0.2024.03.12.08.02.stable_02\":true}",
+    "WelcomeTipsFeaturesUsed": "[{\"Hint\":\"BlockSelect\"},{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"},{\"Action\":\"WarpAI\"},{\"Hint\":\"BlockAction\"}]",
+    "FontSize": "13.0",
+    "ExperimentId": "9e9995b7-5efa-47b3-adf9-ae41647bb3a4"
+  }
+}

@@ -1,0 +1,214 @@
+{
+    "name": "vscode-svg-previewer",
+    "displayName": "SVG Previewer",
+    "description": "Show SVG preview to the side panel",
+    "version": "0.6.0",
+    "publisher": "vitaliymaz",
+    "repository": "https://github.com/vitaliymaz/vscode-svg-previewer",
+    "icon": "logo.png",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:xml",
+        "onWebviewPanel:svg-preview",
+        "onCustomEditor:svgPreviewer.customEditor"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "customEditors": [
+            {
+                "viewType": "svgPreviewer.customEditor",
+                "displayName": "Image Viewer",
+                "selector": [
+                    {
+                        "filenamePattern": "*.svg"
+                    }
+                ],
+                "priority": "option"
+            }
+        ],
+        "commands": [
+            {
+                "command": "svg.showPreview",
+                "title": "%svg.preview.title%",
+                "category": "Svg"
+            },
+            {
+                "command": "svg.showPreviewToSide",
+                "title": "%svg.previewSide.title%",
+                "category": "Svg",
+                "icon": {
+                    "light": "./media/images/preview-right-light.svg",
+                    "dark": "./media/images/preview-right-dark.svg"
+                }
+            },
+            {
+                "command": "svg.showSource",
+                "title": "%svg.showSource.title%",
+                "category": "Svg",
+                "icon": {
+                    "light": "./media/images/view-source-light.svg",
+                    "dark": "./media/images/view-source-dark.svg"
+                }
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "svg.showPreviewToSide",
+                    "when": "editorLangId == xml",
+                    "alt": "svg.showPreviewToSide",
+                    "group": "navigation"
+                },
+                {
+                    "command": "svg.showSource",
+                    "when": "svgPreviewFocus",
+                    "alt": "svg.showSource",
+                    "group": "navigation"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "svg.showPreview",
+                    "when": "editorLangId == xml",
+                    "group": "navigation"
+                },
+                {
+                    "command": "svg.showPreviewToSide",
+                    "when": "editorLangId == xml",
+                    "group": "navigation"
+                },
+                {
+                    "command": "svg.showSource",
+                    "when": "svgPreviewFocus",
+                    "group": "navigation"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "svg.showPreview",
+                    "group": "navigation",
+                    "when": "resourceLangId == xml"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "SVG Previewer",
+            "properties": {
+                "svg.preview.autoOpen": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%svg.autoOpenPreview.dec%"
+                },
+                "svg.preview.boundingBox": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%svg.showSvgBoundingBox.dec%"
+                },
+                "svg.preview.transparencyGrid": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%svg.showTransparencyGrid.dec%"
+                }
+            }
+        },
+        "keybindings": [
+            {
+                "command": "svg.showPreview",
+                "key": "shift+ctrl+v",
+                "mac": "shift+cmd+v",
+                "when": "editorLangId == xml"
+            },
+            {
+                "command": "svg.showPreviewToSide",
+                "key": "ctrl+k v",
+                "mac": "cmd+k v",
+                "when": "editorLangId == xml"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "rm -rf out && tsc -p ./ && webpack",
+        "test": "npm run compile && echo 'no tests yet'",
+        "lint": "standardx */**/*.ts */**/*.tsx",
+        "lint:fix": "standardx --fix */**/*.ts */**/*.tsx"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.14",
+        "@types/vscode": "^1.52.0",
+        "@typescript-eslint/eslint-plugin": "^3.10.1",
+        "@typescript-eslint/parser": "^3.10.1",
+        "standardx": "^5.0.0",
+        "ts-loader": "^5.4.5",
+        "typescript": "^3.9.7",
+        "vscode-test": "^1.4.1",
+        "webpack": "^4.46.0",
+        "webpack-cli": "^3.3.12"
+    },
+    "dependencies": {
+        "preact": "^10.5.10",
+        "redux-zero": "^5.1.7",
+        "vscode-extension-telemetry": "^0.1.6",
+        "vscode-nls": "^4.1.2"
+    },
+    "eslintConfig": {
+        "rules": {
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": "error",
+            "no-useless-constructor": "off",
+            "@typescript-eslint/no-useless-constructor": [
+                "error"
+            ],
+            "indent": "off",
+            "@typescript-eslint/indent": [
+                "error",
+                2,
+                {
+                    "SwitchCase": 1,
+                    "VariableDeclarator": 1,
+                    "outerIIFEBody": 1,
+                    "MemberExpression": 1,
+                    "FunctionDeclaration": {
+                        "parameters": 1,
+                        "body": 1
+                    },
+                    "FunctionExpression": {
+                        "parameters": 1,
+                        "body": 1
+                    },
+                    "CallExpression": {
+                        "arguments": 1
+                    },
+                    "ArrayExpression": 1,
+                    "ObjectExpression": 1,
+                    "ImportDeclaration": 1,
+                    "flatTernaryExpressions": false,
+                    "ignoreComments": false,
+                    "ignoredNodes": [
+                        "TemplateLiteral *"
+                    ]
+                }
+            ]
+        }
+    },
+    "standardx": {
+        "ignore": [
+            "node_modules/"
+        ],
+        "extensions": [],
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint/eslint-plugin"
+        ],
+        "env": [
+            
+        ]
+    }
+}

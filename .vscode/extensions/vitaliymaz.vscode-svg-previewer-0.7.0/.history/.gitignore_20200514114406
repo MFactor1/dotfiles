@@ -1,0 +1,7 @@
+out
+node_modules
+.vscode-test/
+media/index.js
+*.vsix
+.history/
+.DS_store

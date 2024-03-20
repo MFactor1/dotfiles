@@ -1,0 +1,99 @@
+
+/* TODO: bounding box should be broken */
+
+.preview {
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+    overflow: auto;
+
+    background-position: 0 0,8px 8px;
+    background-size: 16px 16px;
+}
+
+body.vscode-high-contrast .preview.light,
+body.vscode-dark .preview.light {
+    background-color: var(--svg-previewer-editor-background-light-base);
+    /* background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-light-base-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-light-base-darker) 0,var(--svg-previewer-editor-background-light-base-darker)),linear-gradient(45deg,var(--svg-previewer-editor-background-light-base-darker) 25%,var(--svg-previewer-editor-background-light-base) 0,var(--svg-previewer-editor-background-light-base) 75%,var(--svg-previewer-editor-background-light-base-darker) 0,var(--svg-previewer-editor-background-light-base-darker)); */
+}
+
+body.vscode-high-contrast .preview.dark.chessboard,
+body.vscode-dark .preview.dark.chessboard  {
+    background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-lighter) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-lighter) 0,var(--svg-previewer-editor-background-lighter)),linear-gradient(45deg,var(--svg-previewer-editor-background-lighter) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-lighter) 0,var(--svg-previewer-editor-background-lighter));
+}
+
+body.vscode-high-contrast .preview.light.chessboard,
+body.vscode-dark .preview.light.chessboard {
+    background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-light-base-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-light-base-darker) 0,var(--svg-previewer-editor-background-light-base-darker)),linear-gradient(45deg,var(--svg-previewer-editor-background-light-base-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-light-base-darker) 0,var(--svg-previewer-editor-background-light-base-darker));
+}
+
+
+
+
+
+
+
+body.vscode-light .preview.dark {
+    /* background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-dark-base) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-dark-base) 0,var(--svg-previewer-editor-background-dark-base)),linear-gradient(45deg,var(--svg-previewer-editor-background-dark-base) 25%,var(--svg-previewer-editor-background-dark-base-lighter) 0,var(--svg-previewer-editor-background-dark-base-lighter) 75%,var(--svg-previewer-editor-background-dark-base) 0,var(--svg-previewer-editor-background-dark-base)); */
+    background-color: var(--svg-previewer-editor-background-dark-base);
+}
+
+body.vscode-light .preview.light.chessboard {
+    background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-darker) 0,var(--svg-previewer-editor-background-darker) 75%,var(--svg-previewer-editor-background-darker) 0,var(--svg-previewer-editor-background-darker));
+}
+
+/* body.vscode-light .preview.light {
+    background-image: linear-gradient(45deg,var(--svg-previewer-editor-background-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-darker) 0,var(--svg-previewer-editor-background-darker)),linear-gradient(45deg,var(--svg-previewer-editor-background-darker) 25%,transparent 0,transparent 75%,var(--svg-previewer-editor-background-darker) 0,var(--svg-previewer-editor-background-darker));
+} */
+
+.preview img {
+    margin: auto;
+    user-select: none;
+}
+
+.error-container {
+    white-space: nowrap;
+    user-select: none;
+    flex-shrink: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.error-container > div {
+    flex-shrink: 0;
+    padding-right: 15px;
+}
+
+.error-container img {
+    padding-right: 10px;
+    padding-left: 15px;
+}
+
+
+/* Bounding Box */
+
+/* vscode cut 1px from the left/right side of a webview */
+.preview.bounding-box {
+    padding-left: 1px;
+    padding-right: 1px;    
+}
+
+.preview.bounding-box img {
+    outline: dashed;
+    outline-width: 1px;
+    outline-offset: -1px;
+}
+
+.preview.dark.bounding-box img,
+body.vscode-dark .preview.transparent.bounding-box img {
+    outline-color: #e6e6e6;
+}
+
+.preview.light.bounding-box img,
+body.light .preview.transparent.bounding-box img {
+    outline-color: #141414;
+}
+
+/* Bounding Box */

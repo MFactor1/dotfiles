@@ -1,0 +1,12 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <title>chessboard</title>
+  <g id="Page-1">
+    <g id="Icon">
+      <rect x="13.33" y="13.33" width="6.67" height="6.67" style="fill: #ccc"/>
+      <rect width="6.67" height="6.67" style="fill: #ccc"/>
+      <rect x="6.67" y="6.67" width="6.66" height="6.66" style="fill: #ccc"/>
+      <rect y="13.33" width="6.67" height="6.67" style="fill: #ccc"/>
+      <rect x="13.33" width="6.67" height="6.67" style="fill: #ccc"/>
+    </g>
+  </g>
+</svg>

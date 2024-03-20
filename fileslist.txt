@@ -1,0 +1,6 @@
+.bashrc
+.themes
+.config/starship.toml
+.config/warp-terminal
+.config/Code
+.vscode
