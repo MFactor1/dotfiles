@@ -34,6 +34,11 @@ if [ -d "../../.vscode" ]; then
     rm -r ../../.vscode
 fi
 
+if [ -d "../../.icons" ]; then
+	echo "Removing existing .icons"
+	rm -r ../../.icons
+fi
+
 echo "Symlinking .zshrc"
 ln -s gitrepos/dotfiles/.zshrc ../../.zshrc
 
@@ -52,3 +57,5 @@ ln -s gitrepos/dotfiles/.themes ../../.themes
 echo "Symlinking .vscode"
 ln -s gitrepos/dotfiles/.vscode ../../.vscode
 
+echo "Symlinking .icons"
+ln -s gitrepos/dotfiles/.icons ../../.icons
