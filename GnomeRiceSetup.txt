@@ -1,0 +1,26 @@
+\\\Extensions\\\
+Blur my Shell
+Caffeine
+Dash to Dock
+Desktop Clock
+	- Lemon Milk Font https://www.dafont.com/lemon-milk.font
+	- 800 weight
+	- Style: Normal
+	- Size 90
+	- Colour #A889FF
+Panel corners
+Space Bar
+System Monitor
+User Themes
+
+\\\Themes\\\
+Icons: Colloid
+Shell: Catppuccin-Macchiato-Standard-Pink-Dark https://github.com/catppuccin/gnome-terminal
+Legacy Applications (GTK): Catppuccin-Macchiato-Standard-Pink-Dark https://github.com/catppuccin/gtk
+VSC: Catppuccin for VSCode (Direct VS extension) https://github.com/catppuccin/vscode
+Chrome: https://github.com/catppuccin/chrome
+Spotify: https://github.com/catppuccin/spicetify
+
+\\\Wallpapers\\\
+https://github.com/Gingeh/wallpapers/
+https://www.pixground.com/abstract-cloud-in-neon-light-ai-generated-4k-wallpaper/d

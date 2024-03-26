@@ -1,16 +1,17 @@
 {
   "prefs": {
-    "ReceivedReferralTheme": "\"Inactive\"",
-    "Shortcuts": "true",
-    "ExperimentId": "9e9995b7-5efa-47b3-adf9-ae41647bb3a4",
-    "FontSize": "13.0",
-    "Theme": "{\"Custom\":{\"name\":\"Catppuccin Macchiato\",\"path\":\"/home/matthewnesbitt/.local/share/warp-terminal/themes/catppuccin_macchiato.yml\"}}",
-    "ChangelogVersions": "{\"v0.2024.03.12.08.02.stable_02\":true,\"v0.2024.03.19.08.01.stable_01\":true}",
     "WelcomeTipsFeaturesUsed": "[{\"Hint\":\"BlockSelect\"},{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"},{\"Action\":\"WarpAI\"},{\"Hint\":\"BlockAction\"}]",
+    "ChangelogVersions": "{\"v0.2024.03.12.08.02.stable_02\":true,\"v0.2024.03.19.08.01.stable_01\":true}",
     "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":2,\"next_refresh_time\":\"2024-03-21T00:23:17.964994Z\"}",
+    "Shortcuts": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "SystemTheme": "false",
+    "FontSize": "13.0",
+    "ExperimentId": "9e9995b7-5efa-47b3-adf9-ae41647bb3a4",
+    "ReceivedReferralTheme": "\"Inactive\"",
     "HonorPS1": "true",
     "FontName": "\"JetBrainsMono Nerd Font\"",
     "HasAutoOpenedWelcomeFolder": "true",
-    "AutosuggestionAcceptedCount": "2"
+    "Theme": "{\"Custom\":{\"name\":\"Catppuccin Macchiato\",\"path\":\"/home/matthewnesbitt/.local/share/warp-terminal/themes/catppuccin_macchiato.yml\"}}"
   }
 }

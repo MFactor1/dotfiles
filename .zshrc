@@ -6,3 +6,5 @@ SAVEHIST=1000
 eval "$(starship init zsh)"
 
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-21.0.2.0.13-1.fc39.x86_64
+
+export PATH=$PATH:/home/matthewnesbitt/.spicetify

@@ -39,6 +39,20 @@ if [ -d "../../.icons" ]; then
 	rm -r ../../.icons
 fi
 
+if [ -d "../../Pictures/wallpapers" ]; then
+	echo "Removing existing wallpapers folder"
+	rm -r ../../Pictures/wallpapers
+fi
+
+if [ -d "../../.spicetify/Themes" ]; then
+	echo "Removing existing .spicetify/Themes folder"
+	rm -r ../../.spicetify/Themes
+fi
+
+if [ ! -d "../../.spicetify" ]; then
+	echo "No existing .spicetify folder. Please install Spicetify if you would like to Symlink Spicetify themes: https://spicetify.app/docs/advanced-usage/installation"
+fi
+
 echo "Symlinking .zshrc"
 ln -s gitrepos/dotfiles/.zshrc ../../.zshrc
 
@@ -59,3 +73,11 @@ ln -s gitrepos/dotfiles/.vscode ../../.vscode
 
 echo "Symlinking .icons"
 ln -s gitrepos/dotfiles/.icons ../../.icons
+
+echo "Symlinking wallpapers"
+ln -s ../gitrepos/dotfiles/wallpapers ../../Pictures/wallpapers
+
+if [ -d "../../.spicetify" ]; then
+	echo "Symlinking .spicetify/Themes"
+	ln -s ../gitrepos/dotfiles/Themes ../../.spicetify/Themes
+fi
