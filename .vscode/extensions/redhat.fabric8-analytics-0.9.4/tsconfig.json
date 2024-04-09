@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "es6",
+      "es2021",
+      "dom"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "out",
+    "sourceMap": true,
+    "rootDir": "."
+  },
+  "exclude": [
+    "node_modules",
+    "ca-lsp-server",
+    ".vscode-test"
+  ]
+}

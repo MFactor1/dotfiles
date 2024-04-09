@@ -81,3 +81,11 @@ if [ -d "../../.spicetify" ]; then
 	echo "Symlinking .spicetify/Themes"
 	ln -s ../gitrepos/dotfiles/Themes ../../.spicetify/Themes
 fi
+
+read -p "Would you like to apply flatpak custom cursor workaround?[y/n]: " ans
+
+if [ "$ans" = "y" ]; then
+	echo "Applying workaround"
+	flatpak --user override --filesystem=/home/$USER/.icons/:ro
+	flatpak --user override --filesystem=/usr/share/icons/:ro
+fi
