@@ -29,10 +29,10 @@ if [ -d "../../.themes" ]; then
     rm -r ../../.themes
 fi
 
-if [ -d "../../.vscode" ]; then
-    echo "Removing existing .vscode"
-    rm -r ../../.vscode
-fi
+#if [ -d "../../.vscode" ]; then
+#    echo "Removing existing .vscode"
+#    rm -r ../../.vscode
+#fi
 
 if [ -d "../../.icons" ]; then
 	echo "Removing existing .icons"
@@ -68,8 +68,8 @@ ln -s ../gitrepos/dotfiles/warp-terminal ../../.config/warp-terminal
 echo "Symlinking .themes"
 ln -s gitrepos/dotfiles/.themes ../../.themes
 
-echo "Symlinking .vscode"
-ln -s gitrepos/dotfiles/.vscode ../../.vscode
+#echo "Symlinking .vscode"
+#ln -s gitrepos/dotfiles/.vscode ../../.vscode
 
 echo "Symlinking .icons"
 ln -s gitrepos/dotfiles/.icons ../../.icons
