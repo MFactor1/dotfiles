@@ -53,7 +53,7 @@ if [ ! -d "../../.spicetify" ]; then
 	echo "No existing .spicetify folder. Please install Spicetify if you would like to Symlink Spicetify themes: https://spicetify.app/docs/advanced-usage/installation"
 fi
 
-if [ -d "../../.gtk-4.0" ]; then
+if [ -d "../../.config/gtk-4.0" ]; then
 	echo "Removing existing .config/gtk-4.0 folder"
 	rm -r /home/$USER/.config/gtk-4.0
 fi
@@ -82,7 +82,7 @@ ln -s gitrepos/dotfiles/.icons /home/$USER/.icons
 echo "Symlinking wallpapers"
 ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers
 
-echo "Symlinking .gtk-4.0"
+echo "Symlinking .config/gtk-4.0"
 ln -s ../gitrepos/dotfiles/gtk-4.0 /home/$USER/.config/gtk-4.0
 
 if [ -d "../../.spicetify" ]; then
