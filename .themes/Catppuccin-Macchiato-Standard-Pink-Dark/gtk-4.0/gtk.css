@@ -138,7 +138,7 @@ label.osd {
   color: #FFFFFF;
 }
 
-.dim-label, row.expander image.expander-row-arrow, row label.subtitle {
+.dim-label, row.expander image.expander-row-arrow, row.property > box.header > box.title > .title, row label.subtitle {
   color: rgba(255, 255, 255, 0.7);
   opacity: 1;
 }
@@ -194,7 +194,7 @@ label.osd {
   font-size: 11pt;
 }
 
-.caption {
+.caption, row.property > box.header > box.title > .title {
   font-weight: 400;
   font-size: 9pt;
 }
@@ -2101,6 +2101,7 @@ headerbar .subtitle,
 headerbar .dim-label,
 headerbar row.expander image.expander-row-arrow,
 row.expander headerbar image.expander-row-arrow,
+headerbar row.property > box.header > box.title > .title,
 headerbar row label.subtitle,
 row headerbar label.subtitle {
   transition: color 75ms cubic-bezier(0, 0, 0.2, 1);
@@ -2111,6 +2112,7 @@ headerbar .subtitle:backdrop,
 headerbar .dim-label:backdrop,
 headerbar row.expander image.expander-row-arrow:backdrop,
 row.expander headerbar image.expander-row-arrow:backdrop,
+headerbar row.property > box.header > box.title > .title:backdrop,
 headerbar row label.subtitle:backdrop,
 row headerbar label.subtitle:backdrop {
   color: rgba(255, 255, 255, 0.5);
@@ -2764,14 +2766,14 @@ notebook > header > tabs > tab:active {
   box-shadow: none;
 }
 
-notebook > header > tabs > tab:selected:not(:active) {
+notebook > header > tabs > tab:checked {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1), border-image 225ms cubic-bezier(0, 0, 0.2, 1), background-size 0ms, background-image 0ms, background-color 0ms;
   background-color: rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-notebook > header > tabs > tab:selected:not(:active):disabled {
+notebook > header > tabs > tab:checked:disabled {
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -3003,7 +3005,7 @@ tabbar .box {
   border-radius: 0;
   min-height: 36px;
   border: none;
-  box-shadow: none;
+  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.12);
 }
 
 tabbar .box:backdrop {
@@ -4381,26 +4383,6 @@ row {
   background-clip: padding-box;
 }
 
-row label.subtitle {
-  font-size: smaller;
-}
-
-row > box.header {
-  margin-left: 12px;
-  margin-right: 12px;
-  min-height: 48px;
-}
-
-row > box.header > .icon:disabled {
-  filter: opacity(0.35);
-}
-
-row > box.header > box.title {
-  margin-top: 6px;
-  margin-bottom: 6px;
-  border-spacing: 3px;
-}
-
 .nautilus-window .nautilus-grid-view child.activatable, columnview.view > header > button,
 treeview.view > header > button, row.activatable {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1), background-size 300ms cubic-bezier(0, 0, 0.2, 1), background-image 1200ms cubic-bezier(0, 0, 0.2, 1), font-weight 0;
@@ -4550,6 +4532,23 @@ row > box.header > .prefixes:dir(rtl) {
   margin-left: 6px;
 }
 
+row.property > box.header > box.title > .subtitle {
+  font-size: inherit;
+  opacity: 1;
+}
+
+row.entry:not(:selected).activatable.focused:hover, row.entry:not(:selected).activatable.focused:active {
+  background-color: transparent;
+}
+
+row.entry:disabled text {
+  opacity: 0.45;
+}
+
+row.entry:disabled .dim-label, row.entry:disabled row.expander image.expander-row-arrow, row.expander row.entry:disabled image.expander-row-arrow, row.entry:disabled row.property > box.header > box.title > .title, row.entry:disabled .subtitle {
+  opacity: 1;
+}
+
 row.entry .edit-icon, row.entry .indicator {
   min-width: 24px;
   min-height: 24px;
@@ -4570,6 +4569,10 @@ row.entry.monospace {
 
 row.entry.monospace text {
   font-family: monospace;
+}
+
+row.spin:not(:selected).activatable.focused:hover, row.spin:not(:selected).activatable.focused:active {
+  background-color: transparent;
 }
 
 row.spin spinbutton {
@@ -4615,10 +4618,11 @@ row.spin.error text > cursor-handle > contents {
   background-color: currentColor;
 }
 
-row.entry.error .dim-label, row.entry.error row.expander image.expander-row-arrow, row.expander row.entry.error image.expander-row-arrow, row.entry.error .subtitle,
+row.entry.error .dim-label, row.entry.error row.expander image.expander-row-arrow, row.expander row.entry.error image.expander-row-arrow, row.entry.error row.property > box.header > box.title > .title, row.entry.error .subtitle,
 row.spin.error .dim-label,
 row.spin.error row.expander image.expander-row-arrow,
 row.expander row.spin.error image.expander-row-arrow,
+row.spin.error row.property > box.header > box.title > .title,
 row.spin.error .subtitle {
   opacity: 1;
 }
@@ -4639,10 +4643,11 @@ row.spin.warning text > cursor-handle > contents {
   background-color: currentColor;
 }
 
-row.entry.warning .dim-label, row.entry.warning row.expander image.expander-row-arrow, row.expander row.entry.warning image.expander-row-arrow, row.entry.warning .subtitle,
+row.entry.warning .dim-label, row.entry.warning row.expander image.expander-row-arrow, row.expander row.entry.warning image.expander-row-arrow, row.entry.warning row.property > box.header > box.title > .title, row.entry.warning .subtitle,
 row.spin.warning .dim-label,
 row.spin.warning row.expander image.expander-row-arrow,
 row.expander row.spin.warning image.expander-row-arrow,
+row.spin.warning row.property > box.header > box.title > .title,
 row.spin.warning .subtitle {
   opacity: 1;
 }
@@ -4663,10 +4668,11 @@ row.spin.success text > cursor-handle > contents {
   background-color: currentColor;
 }
 
-row.entry.success .dim-label, row.entry.success row.expander image.expander-row-arrow, row.expander row.entry.success image.expander-row-arrow, row.entry.success .subtitle,
+row.entry.success .dim-label, row.entry.success row.expander image.expander-row-arrow, row.expander row.entry.success image.expander-row-arrow, row.entry.success row.property > box.header > box.title > .title, row.entry.success .subtitle,
 row.spin.success .dim-label,
 row.spin.success row.expander image.expander-row-arrow,
 row.expander row.spin.success image.expander-row-arrow,
+row.spin.success row.property > box.header > box.title > .title,
 row.spin.success .subtitle {
   opacity: 1;
 }
@@ -4695,6 +4701,15 @@ row.combo listview.inline, row.combo listview.inline:disabled {
 
 row.combo popover > contents {
   min-width: 120px;
+}
+
+row.combo popover > contents .combo-searchbar {
+  margin: 6px;
+}
+
+row.combo popover > contents .combo-searchbar + scrolledwindow > undershoot.top {
+  box-shadow: none;
+  background: linear-gradient(to bottom, alpha(rgba(255, 255, 255, 0.12), 0.75), transparent 6px);
 }
 
 list.content > row, list.content > row.expander row.header,
@@ -5938,9 +5953,17 @@ popover.entry-completion > contents {
   border-spacing: 0;
 }
 
+navigation-view-page > toolbarview > scrolledwindow > viewport > clamp > box.medium > box > stack > button {
+  margin-top: 12px;
+}
+
 window.dialog > box > stack > box > box > notebook.frame {
   border-width: 0 0 0 1px;
   border-radius: 0;
+}
+
+.background-thumbnail > button.remove-button {
+  margin: 6px;
 }
 
 .display-container.card {

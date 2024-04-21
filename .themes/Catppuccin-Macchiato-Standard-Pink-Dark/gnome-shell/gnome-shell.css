@@ -370,7 +370,6 @@ StWidget.focused .app-well-app-running-dot {
   color: rgba(255, 255, 255, 0.7);
   background-color: rgba(255, 255, 255, 0.04);
   border-radius: 6px;
-  border: none;
   box-shadow: none;
   text-shadow: none;
 }
@@ -2115,7 +2114,6 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.7);
   background-color: #24273a;
-  border: none;
   text-shadow: none;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
@@ -2503,6 +2501,7 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
 }
 
 #panel Gjs_status_keyboard_InputSourceIndicator.panel-button,
+#panel Gjs_appindicatorsupport_rgcjonas_gmail_com_indicatorStatusIcon_IndicatorStatusIcon.panel-button,
 #panel Gjs_appindicatorsupport_rgcjonas_gmail_com_indicatorStatusIcon_AppIndicatorsIndicatorStatusIcon.panel-button {
   -natural-hpadding: 18px !important;
   -minimum-hpadding: 18px !important;
