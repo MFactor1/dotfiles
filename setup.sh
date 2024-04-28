@@ -34,9 +34,9 @@ fi
 #    rm -r /home/$USER/.vscode
 #fi
 
-if [ -d "../../.icons" ]; then
-	echo "Removing existing .icons"
-	rm -r /home/$USER/.icons
+if [ -d "/home/$USER/.local/share/icons" ]; then
+	echo "Removing existing .local/share/icons"
+	rm -r /home/$USER/.local/share/icons
 fi
 
 if [ -d "../../Pictures/wallpapers" ]; then
@@ -76,8 +76,8 @@ ln -s gitrepos/dotfiles/.themes /home/$USER/.themes
 #echo "Symlinking .vscode"
 #ln -s gitrepos/dotfiles/.vscode /home/$USER/.vscode
 
-echo "Symlinking .icons"
-ln -s gitrepos/dotfiles/.icons /home/$USER/.icons
+echo "Symlinking .local/share/icons"
+ln -s ../../gitrepos/dotfiles/icons /home/$USER/.local/share/icons
 
 echo "Symlinking wallpapers"
 ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers

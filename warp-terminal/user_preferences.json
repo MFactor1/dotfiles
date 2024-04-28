@@ -1,24 +1,25 @@
 {
   "prefs": {
-    "Theme": "{\"Custom\":{\"name\":\"Catppuccin Macchiato\",\"path\":\"/home/matthewnesbitt/.local/share/warp-terminal/themes/catppuccin_macchiato.yml\"}}",
+    "AutosuggestionAcceptedCount": "2",
     "FontName": "\"JetBrainsMono Nerd Font\"",
-    "WelcomeTipsFeaturesUsed": "[{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"},{\"Hint\":\"BlockSelect\"},{\"Action\":\"WarpAI\"},{\"Action\":\"AiCommandSearch\"},{\"Action\":\"SplitPane\"},{\"Hint\":\"BlockAction\"},{\"Action\":\"CommandSearch\"}]",
+    "Theme": "{\"Custom\":{\"name\":\"Catppuccin Macchiato\",\"path\":\"/home/matthewnesbitt/.local/share/warp-terminal/themes/catppuccin_macchiato.yml\"}}",
+    "FontSize": "13.0",
     "Notifications": "{\"mode\":\"Enabled\",\"is_long_running_enabled\":true,\"long_running_threshold\":{\"secs\":30,\"nanos\":0},\"is_password_prompt_enabled\":true}",
-    "ReceivedReferralTheme": "\"Inactive\"",
-    "RestoreSession": "false",
-    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":1,\"next_refresh_time\":\"2024-04-21T18:22:49.042198870Z\"}",
-    "NotebookFontSize": "14.0",
-    "Shortcuts": "true",
     "LaunchNotebookShown": "true",
     "SystemTheme": "false",
-    "FontSize": "13.0",
     "HasAutoOpenedWelcomeFolder": "true",
-    "ExperimentId": "9e9995b7-5efa-47b3-adf9-ae41647bb3a4",
-    "AutosuggestionAcceptedCount": "2",
-    "ShouldDimInactivePanes": "false",
-    "ChangelogVersions": "{\"v0.2024.03.12.08.02.stable_02\":true,\"v0.2024.03.19.08.01.stable_01\":true,\"v0.2024.03.26.08.02.stable_02\":true,\"v0.2024.04.02.08.02.stable_01\":true,\"v0.2024.04.09.08.01.stable_01\":true,\"v0.2024.04.16.08.02.stable_00\":true}",
+    "NotebookFontSize": "14.0",
+    "SavedPrompt": "\"Default\"",
+    "StartupShellOverride": "\"zsh\"",
+    "RestoreSession": "false",
     "HonorPS1": "true",
+    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":1,\"next_refresh_time\":\"2024-04-21T18:22:49.042198870Z\"}",
+    "ExperimentId": "9e9995b7-5efa-47b3-adf9-ae41647bb3a4",
+    "Shortcuts": "true",
+    "WelcomeTipsFeaturesUsed": "[{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"},{\"Hint\":\"BlockSelect\"},{\"Action\":\"WarpAI\"},{\"Action\":\"AiCommandSearch\"},{\"Action\":\"SplitPane\"},{\"Hint\":\"BlockAction\"},{\"Action\":\"CommandSearch\"}]",
     "OverrideOpacity": "100",
-    "StartupShellOverride": "\"zsh\""
+    "ChangelogVersions": "{\"v0.2024.03.12.08.02.stable_02\":true,\"v0.2024.03.19.08.01.stable_01\":true,\"v0.2024.03.26.08.02.stable_02\":true,\"v0.2024.04.02.08.02.stable_01\":true,\"v0.2024.04.09.08.01.stable_01\":true,\"v0.2024.04.16.08.02.stable_00\":true,\"v0.2024.04.16.08.02.stable_01\":true,\"v0.2024.04.16.08.02.stable_03\":true,\"v0.2024.04.23.08.01.stable_03\":true}",
+    "ReceivedReferralTheme": "\"Inactive\"",
+    "ShouldDimInactivePanes": "false"
   }
 }
