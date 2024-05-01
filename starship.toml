@@ -1,20 +1,15 @@
 # ~/.config/starship.toml
 
-format = """\ 
-[ test ](bg:#ED8796 fg:#494D64)\
-[](fg:#ED8796 bg:#24273A)\
-"""
 
-# Use custom format
-#format = """\
-#[ matt ](bg:#ED8796 fg:#494D64)\
-#[](fg:#ED8796 bg:#494D64)\
-#$time\
-#[](fg:#494D64 bg:#A5ADCB)\
-#$directory\
-#[ ](fg:#A5ADCB bg:#24273A)\
-#$character
-#"""
+format = """\
+[ matt ](bg:#ED8796 fg:#494D64)\
+[](fg:#ED8796 bg:#494D64)\
+$time\
+[](fg:#494D64 bg:#A5ADCB)\
+$directory\
+[ ](fg:#A5ADCB bg:#24273A)\
+$character
+"""
 
 [directory]
 format = "[ $path ]($style)"
