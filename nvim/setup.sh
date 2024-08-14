@@ -1,5 +1,9 @@
-if [ ! -f "/home/$USER/.vim/autoload/plug.vim" ]
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ ! -d "/home/$USER/.config/nvim" ]; then
+	mkdir /home/$USER/.config/nvim
+fi
+
+if [ ! -f '/home/$USER/.local/share/nvim/site/autoload/plug.vim' ]; then
+	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'	
 fi
 
 if [ -d "/home/$USER/.config/nvim/coc-settings.json" ]; then
@@ -12,10 +16,10 @@ if [ -d "/home/$USER/.config/nvim/init.lua" ]; then
 	rm -r /home/$USER/.config/nvim/init.lua
 fi
 
-echo "Symlinking coc-settings.json"
-ln -s ./coc-settings.json /home/$USER/.config/nvim/coc-settings.json
+echo "Copying coc-settings.json"
+cp ./coc-settings.json /home/$USER/.config/nvim/coc-settings.json
 
-echo "Symlinking init.lua"
-ln -s ./init.lua home/$USER/.config/nvim/init.lua
+echo "Copying init.lua"
+cp ./init.lua /home/$USER/.config/nvim/init.lua
 
 nvim -c ":PlugInstall"

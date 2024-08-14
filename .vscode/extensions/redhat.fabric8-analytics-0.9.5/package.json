@@ -1,0 +1,396 @@
+{
+	"name": "fabric8-analytics",
+	"displayName": "Red Hat Dependency Analytics",
+	"description": "Provides insights on security vulnerabilities in your application dependencies.",
+	"version": "0.9.5",
+	"author": "Red Hat",
+	"publisher": "redhat",
+	"preview": true,
+	"contributors": [
+		{
+			"name": "Ilona Shishov",
+			"email": "ishishov@redhat.com"
+		}
+	],
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/fabric8-analytics/fabric8-analytics-vscode-extension/issues",
+		"email": "ishishov@redhat.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fabric8-analytics/fabric8-analytics-vscode-extension"
+	},
+	"homepage": "https://github.com/fabric8-analytics/fabric8-analytics-vscode-extension/blob/master/README.md",
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"security",
+		"vulnerability",
+		"dependency scan",
+		"node",
+		"java",
+		"multi-root ready",
+		"CVE"
+	],
+	"icon": "icon/trusted_content_icon.png",
+	"engines": {
+		"vscode": "^1.76.0"
+	},
+	"activationEvents": [
+		"workspaceContains:**/package.json",
+		"workspaceContains:**/pom.xml",
+		"workspaceContains:**/go.mod",
+		"workspaceContains:**/requirements.txt",
+		"workspaceContains:**/build.gradle",
+		"workspaceContains:**/Dockerfile",
+		"workspaceContains:**/Containerfile"
+	],
+	"main": "./dist/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "rhda.stackAnalysis",
+				"title": "Red Hat Dependency Analytics Report...",
+				"category": "Red Hat Dependency Analytics"
+			},
+			{
+				"command": "rhda.stackAnalysisFromPieBtn",
+				"title": "Open Red Hat Dependency Analytics Report",
+				"icon": {
+					"light": "icon/report-icon.png",
+					"dark": "icon/report-icon.png"
+				}
+			},
+			{
+				"command": "rhda.stackAnalysisFromEditor",
+				"title": "Red Hat Dependency Analytics Report..."
+			},
+			{
+				"command": "rhda.stackAnalysisFromExplorer",
+				"title": "Red Hat Dependency Analytics Report..."
+			},
+			{
+				"command": "rhda.stackLogs",
+				"title": "Debug logs",
+				"category": "Red Hat Dependency Analytics"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == pom.xml",
+					"group": "navigation"
+				},
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == package.json",
+					"group": "navigation"
+				},
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == go.mod",
+					"group": "navigation"
+				},
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == requirements.txt",
+					"group": "navigation"
+				},
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == build.gradle",
+					"group": "navigation"
+				},
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "resourceFilename == Dockerfile || resourceFilename == Containerfile",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == package.json"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == pom.xml"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == go.mod"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == requirements.txt"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == build.gradle"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "resourceFilename == Dockerfile || resourceFilename == Containerfile"
+				}
+			],
+			"editor/context": [
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == package.json"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == pom.xml"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == go.mod"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == requirements.txt"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == build.gradle"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "resourceFilename == Dockerfile || resourceFilename == Containerfile"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "rhda.stackAnalysisFromPieBtn",
+					"when": "false"
+				},
+				{
+					"command": "rhda.stackAnalysisFromEditor",
+					"when": "false"
+				},
+				{
+					"command": "rhda.stackAnalysisFromExplorer",
+					"when": "false"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Red Hat Dependency Analytics configuration",
+			"properties": {
+				"redhat.telemetry.enabled": {
+					"type": "boolean",
+					"default": null,
+					"markdownDescription": "Enable usage data and errors to be sent to Red Hat servers. Read our [privacy statement](https://developers.redhat.com/article/tool-data-collection).",
+					"scope": "window"
+				},
+				"redHatDependencyAnalyticsServer.trace.server": {
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VSCode and the Red Hat Dependency Analytics Language Server."
+				},
+				"redHatDependencyAnalytics.matchManifestVersions": {
+					"type": "boolean",
+					"default": true,
+					"description": "Restricts RHDA from performing analysis on dependency tags that do not match the tags requested within the manifest files.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.reportFilePath": {
+					"type": "string",
+					"default": "/tmp/redhatDependencyAnalyticsReport.html",
+					"description": "Path to a local file where the Red Hat Dependency Analytics report will be saved.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.mvn.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of mvn executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.gradle.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of gradle executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.npm.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of npm executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.go.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of go executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.python3.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of python3 executable, python3 takes precedence over python.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.pip3.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of pip3 executable, pip3 takes precedence over pip.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.python.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of python executable, python3 takes precedence over python.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.pip.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of pip executable, pip3 takes precedence over pip.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.vulnerabilityAlertSeverity": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning"
+					],
+					"default": "Error",
+					"description": "Defines the severity level of alerts for detected vulnerabilities in dependencies.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.usePythonVirtualEnvironment": {
+					"type": "boolean",
+					"default": false,
+					"description": "Automates the installation of missing packages in a Python virtual environment.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.useGoMVS": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use the Minimal Version Selection (MVS) algorithm to select a set of module versions to use when building Go packages.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.enablePythonBestEffortsInstallation": {
+					"type": "boolean",
+					"default": false,
+					"description": "Installs Python packages tailored to the Python version in use, disregarding declared versions. Note: Requires settings Match Manifest Versions to be set to false and Use Python Virtual Environment to be set to true.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.usePipDepTree": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use lightweight pipdeptree command line tool as the data source for building the Python dependency tree. This may significantly enhance analysis time.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.syft.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of syft executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.syft.config.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path to the syft configuration file.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.skopeo.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of skopeo executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.skopeo.config.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path to the authentication file used by 'skopeo inspect'.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.docker.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of docker executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.podman.executable.path": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies absolute path of podman executable.",
+					"scope": "window"
+				},
+				"redHatDependencyAnalytics.imagePlatform": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies platform used for multi-arch images.",
+					"scope": "window"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "webpack --mode production",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch",
+		"test-compile": "tsc -p ./",
+		"posttest-compile": "./transformToDynamicImport.sh",
+		"pretest": "npm run test-compile",
+		"test": "node ./out/test/runTest.js",
+		"coverage": "nyc npm run test",
+		"reinstall": "npm cache verify && npm install",
+		"lint": "eslint -c .eslintrc.js --ext .ts src/"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.2",
+		"@types/node": "^20.8.4",
+		"@types/sinon": "^10.0.19",
+		"@types/vscode": "^1.76.0",
+		"@typescript-eslint/eslint-plugin": "^6.8.0",
+		"@typescript-eslint/parser": "^6.8.0",
+		"@vscode/test-electron": "^2.3.5",
+		"babel-plugin-rewire": "^1.2.0",
+		"chai": "^4.3.10",
+		"decache": "^4.6.2",
+		"eslint": "^8.51.0",
+		"mocha": "^10.4.0",
+		"nyc": "^17.0.0",
+		"sinon": "^16.1.0",
+		"sinon-chai": "^3.7.0",
+		"source-map-loader": "^4.0.1",
+		"supports-color": "^9.4.0",
+		"ts-loader": "^9.5.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.2.2",
+		"webpack": "^5.88.2",
+		"webpack-cli": "^5.1.4"
+	},
+	"dependencies": {
+		"@fabric8-analytics/fabric8-analytics-lsp-server": "^0.9.4-ea.26",
+		"@redhat-developer/vscode-redhat-telemetry": "^0.8.0",
+		"@RHEcosystemAppEng/exhort-javascript-api": "^0.1.1-ea.50",
+		"fs": "^0.0.1-security",
+		"path": "^0.12.7",
+		"vscode-languageclient": "^8.1.0"
+	},
+	"__metadata": {
+		"id": "efcb43ca-77e6-43e4-8ddc-ada617cb34bd",
+		"publisherId": "eed56242-9699-4317-8bc7-e9f4b9bdd3ff",
+		"publisherDisplayName": "Red Hat",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1723075874508,
+		"pinned": false,
+		"preRelease": false,
+		"source": "gallery"
+	}
+}
