@@ -22,7 +22,7 @@ vim.g.coc_global_extensions = {'coc-json', 'coc-sh', 'coc-pyright', 'coc-zig', '
 -- setup left side columm
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = 'yes:2' 
+vim.opt.signcolumn = 'yes:2'
 
 local keyset = vim.keymap.set
 
@@ -94,4 +94,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 keyset('n',  '<leader>f', ':Telescope find_files <CR>')
 keyset('n',  '<leader>g', ':Telescope live_grep <CR>')
 keyset('n',  '<leader>c', ':Telescope grep_string <CR>')
+
+vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
+vim.cmd('match EoLSpace /\\s\\+$/')
 
