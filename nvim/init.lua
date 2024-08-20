@@ -92,9 +92,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 -- telescope keybinds
-keyset('n',  '<leader>f', ':Telescope find_files <CR>')
-keyset('n',  '<leader>g', ':Telescope live_grep <CR>')
-keyset('n',  '<leader>c', ':Telescope grep_string <CR>')
+keyset('n', '<leader>f', ':Telescope find_files <CR>')
+keyset('n', '<leader>g', ':Telescope live_grep <CR>')
+keyset('n', '<leader>c', ':Telescope grep_string <CR>')
+keyset('n', '<leader>wq', ':wall <CR>:q <CR>') -- save and close all
 
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
