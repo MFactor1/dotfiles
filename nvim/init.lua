@@ -16,6 +16,7 @@ vim.call('plug#end')
 vim.g.mapleader = " "
 vim.opt.updatetime = 300
 vim.opt.swapfile = false
+vim.opt.wrap = false
 
 -- coc auto install extensions
 vim.g.coc_global_extensions = {'coc-json', 'coc-sh', 'coc-pyright', 'coc-zig', 'coc-cmake'}
@@ -100,5 +101,6 @@ keyset('n', '<leader>wq', ':wall <CR>:q <CR>') -- save and close all
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
 vim.cmd('match EoLSpace /\\s\\+$/')
-vim.cmd('match EoLSpace /^\\n\\%$/')
+--vim.cmd('highlight EoFNewline ctermbg=244 guibg=#5e3f53')
+--vim.cmd('match EoFNewline /^\\n\\%$/')
 
