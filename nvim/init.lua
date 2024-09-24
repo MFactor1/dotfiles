@@ -21,7 +21,7 @@ vim.opt.swapfile = false
 vim.opt.wrap = false
 
 -- coc auto install extensions
-vim.g.coc_global_extensions = {'coc-json', 'coc-sh', 'coc-pyright', 'coc-zig', 'coc-cmake'}
+vim.g.coc_global_extensions = {'coc-json', 'coc-sh', 'coc-pyright', 'coc-zig', 'coc-cmake', 'coc-java'}
 
 -- setup left side columm
 vim.opt.number = true
