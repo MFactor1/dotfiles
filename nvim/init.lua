@@ -3,17 +3,19 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
-Plug('catppuccin/nvim', { ['as'] = 'catppuccin'})
+Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
---Plug('Bekaboo/dropbar.nvim')
+Plug('Bekaboo/dropbar.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
 Plug('lewis6991/gitsigns.nvim')
+Plug('lervag/vimtex')
 
 vim.call('plug#end')
 
 vim.g.mapleader = " "
+vim.g.vimtex_mappings_prefix = " "
 vim.opt.updatetime = 300
 vim.opt.swapfile = false
 vim.opt.wrap = false
@@ -73,6 +75,8 @@ require('gitsigns').setup {
 
 -- vertical tabspace lines
 require("ibl").setup()
+
+require("dropbar").setup()
 
 -- autocomplete
 function _G.check_back_space()
