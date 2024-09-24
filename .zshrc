@@ -9,6 +9,7 @@ export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-21.0.4.0.7-2.fc40.x86_64
 
 export PATH=$PATH:/home/$USER/.spicetify
 export PATH=$PATH:/home/$USER/bin
+export PATH=$PATH:/home/$USER/.cargo/bin
 
 up() {
 	declare -i d=${@:-1}
