@@ -22,4 +22,11 @@ cp ./coc-settings.json /home/$USER/.config/nvim/coc-settings.json
 echo "Copying init.lua"
 cp ./init.lua /home/$USER/.config/nvim/init.lua
 
+echo "Checking for SQL lsp"
+if [ ! -d "/usr/local/lib/node_modules/sql-language-server" ]; then
+	echo "SQL lsp not found"
+	echo "Installing SQL lsp"
+	sudo npm i -g sql-language-server
+fi
+
 nvim -c ":PlugInstall"

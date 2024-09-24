@@ -5,4 +5,11 @@
 	"zig.startUpMessage": true,
 	"zig.path": "zls",
 	"zig.debugLog": false,
+	"languageserver": {
+		"sql": {
+			"module": "/usr/local/lib/node_modules/sql-language-server/dist/bin/cli.js",
+			"args": ["up", "--method", "node-ipc"],
+			"filetypes": ["sql", "mysql"]
+		}
+	}
 }
