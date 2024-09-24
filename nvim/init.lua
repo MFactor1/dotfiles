@@ -28,6 +28,10 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes:2'
 
+-- formatting opts
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+
 local keyset = vim.keymap.set
 
 -- catppuccin setup
