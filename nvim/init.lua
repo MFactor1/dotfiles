@@ -15,7 +15,8 @@ Plug('lervag/vimtex')
 vim.call('plug#end')
 
 vim.g.mapleader = " "
-vim.g.vimtex_mappings_prefix = " "
+vim.g.vimtex_mappings_prefix = "\\"
+vim.g.vimtex_view_method = "general"
 vim.opt.updatetime = 300
 vim.opt.swapfile = false
 vim.opt.wrap = false
