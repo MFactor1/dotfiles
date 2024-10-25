@@ -1,5 +1,5 @@
 # Catppuccin Gnome Dotfiles
-## Warning!! SETUP.SH CONTAINS rm -r COMMANDS
+## Warning!! SETUP.SH OVERWRITES EXISTING DOTFILES
 #### setup.sh is written for my personal dotfile management system and WILL OVERWRITE all other dotfiles for:
 ####   - GTK (.themes)
 ####   - ZSH (.zshrc)
