@@ -5,11 +5,14 @@ SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 eval "$(starship init zsh)"
 
+USER=`whoami`
+
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-21.0.4.0.7-2.fc40.x86_64
 
 export PATH=$PATH:/home/$USER/.spicetify
 export PATH=$PATH:/home/$USER/bin
 export PATH=$PATH:/home/$USER/.cargo/bin
+export PATH=$PATH:/home/$USER/.local/bin
 
 up() {
 	declare -i d=${@:-1}
@@ -27,4 +30,5 @@ irebase() {
 	git rebase -i HEAD~$1
 }
 alias purge-repo='purge_repo_cache'
+alias cp='cp -r'
 

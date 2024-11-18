@@ -1,31 +1,32 @@
 #!/usr/bin/bash
+USER=`whoami`
 if [ -f "../../.zshrc" ]; then
-    echo "Removing existing .zshrc"
+    echo "Removing existing ~/.zshrc"
     rm /home/$USER/.zshrc
 fi
 
 if [ ! -d "../../.config" ]; then
-    echo "No existing .config folder, creating one"
+    echo "No existing ~/.config folder, creating one"
     mkdir /home/$USER/.config
 fi
 
 if [ -f "../../.config/starship.toml" ]; then
-    echo "Removing existing .config/starship.toml"
+    echo "Removing existing ~/.config/starship.toml"
     rm /home/$USER/.config/starship.toml
 fi
 
 if [ -f "../../.bashrc" ]; then
-    echo "Removing existing .bashrc"
+    echo "Removing existing ~/.bashrc"
     rm /home/$USER/.bashrc
 fi
 
 if [ -d "../../.config/warp-terminal" ]; then
-    echo "Removing existing .config/warp-terminal"
+    echo "Removing existing ~/.config/warp-terminal"
     rm -r /home/$USER/.config/warp-terminal
 fi
 
 if [ -d "../../.themes" ]; then
-    echo "Removing existing .themes"
+    echo "Removing existing ~/.themes"
     rm -r /home/$USER/.themes
 fi
 
@@ -35,7 +36,7 @@ fi
 #fi
 
 if [ -d "/home/$USER/.local/share/icons" ]; then
-	echo "Removing existing .local/share/icons"
+	echo "Removing existing ~/.local/share/icons"
 	rm -r /home/$USER/.local/share/icons
 fi
 
@@ -45,49 +46,56 @@ if [ -d "../../Pictures/wallpapers" ]; then
 fi
 
 if [ -d "../../.spicetify/Themes" ]; then
-	echo "Removing existing .spicetify/Themes folder"
+	echo "Removing existing ~/.spicetify/Themes folder"
 	rm -r /home/$USER/.spicetify/Themes
 fi
 
 if [ ! -d "../../.spicetify" ]; then
-	echo "No existing .spicetify folder. Please install Spicetify if you would like to Symlink Spicetify themes: https://spicetify.app/docs/advanced-usage/installation"
+	echo "No existing ~/.spicetify folder. Please install Spicetify if you would like to Symlink Spicetify themes: https://spicetify.app/docs/advanced-usage/installation"
 fi
 
 if [ -d "../../.config/gtk-4.0" ]; then
-	echo "Removing existing .config/gtk-4.0 folder"
+	echo "Removing existing ~/.config/gtk-4.0 folder"
 	rm -r /home/$USER/.config/gtk-4.0
 fi
 
-echo "Symlinking .zshrc"
+echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
-echo "Symlinking .config/starship.toml"
+echo "Symlinking ~/.config/starship.toml"
 ln -s ../gitrepos/dotfiles/starship.toml /home/$USER/.config/starship.toml
 
-echo "Symlinking .bashrc"
+echo "Symlinking ~/.bashrc"
 ln -s gitrepos/dotfiles/.bashrc /home/$USER/.bashrc
 
-echo "Symlinking .config/warp-terminal"
+echo "Symlinking ~/.config/warp-terminal"
 ln -s ../gitrepos/dotfiles/warp-terminal /home/$USER/.config/warp-terminal
 
-echo "Symlinking .themes"
+echo "Symlinking ~/.themes"
 ln -s gitrepos/dotfiles/.themes /home/$USER/.themes
 
 #echo "Symlinking .vscode"
 #ln -s gitrepos/dotfiles/.vscode /home/$USER/.vscode
 
-echo "Symlinking .local/share/icons"
+echo "Symlinking ~/.local/share/icons"
 ln -s ../../gitrepos/dotfiles/icons /home/$USER/.local/share/icons
 
 echo "Symlinking wallpapers"
 ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers
 
-echo "Symlinking .config/gtk-4.0"
+echo "Symlinking ~/.config/gtk-4.0"
 ln -s ../gitrepos/dotfiles/gtk-4.0 /home/$USER/.config/gtk-4.0
 
 if [ -d "../../.spicetify" ]; then
-	echo "Symlinking .spicetify/Themes"
+	echo "Symlinking ~/.spicetify/Themes"
 	ln -s ../gitrepos/dotfiles/Themes /home/$USER/.spicetify/Themes
+fi
+
+if [ -d "/home/$USER/.config/vesktop" ]; then
+	echo "Removing existing ~/.config/vesktop/themes"
+	rm -rf "/home/$USER/.config/vesktop/themes"
+	echo "Symlinking ~/.config/vesktop/themes"
+	ln -s ../../gitrepos/dotfiles/vesktop_themes /home/$USER/.config/vesktop/themes
 fi
 
 read -p "Would you like to apply flatpak custom cursor workaround?[y/n]: " ans
