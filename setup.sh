@@ -46,8 +46,8 @@ if [ -d "../../Pictures/wallpapers" ]; then
 fi
 
 if [ -d "../../.spicetify/Themes" ]; then
-	echo "Removing existing ~/.spicetify/Themes folder"
-	rm -r /home/$USER/.spicetify/Themes
+	echo "Removing existing ~/.config/spicetify/Themes folder"
+	rm -r /home/$USER/.config/spicetify/Themes
 fi
 
 if [ ! -d "../../.spicetify" ]; then
@@ -86,9 +86,9 @@ ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers
 echo "Symlinking ~/.config/gtk-4.0"
 ln -s ../gitrepos/dotfiles/gtk-4.0 /home/$USER/.config/gtk-4.0
 
-if [ -d "../../.spicetify" ]; then
-	echo "Symlinking ~/.spicetify/Themes"
-	ln -s ../gitrepos/dotfiles/Themes /home/$USER/.spicetify/Themes
+if [ -d "../../.config/spicetify" ]; then
+	echo "Symlinking ~/.config/spicetify/Themes"
+	ln -s ../../gitrepos/dotfiles/Themes /home/$USER/.config/spicetify/Themes
 fi
 
 if [ -d "/home/$USER/.config/vesktop" ]; then
@@ -104,4 +104,12 @@ if [ "$ans" = "y" ]; then
 	echo "Applying workaround"
 	flatpak --user override --filesystem=/home/$USER/.icons/:ro
 	flatpak --user override --filesystem=/usr/share/icons/:ro
+fi
+
+read -p "Would you like to apply flatpak Spotify permissions for Spicetify?[y/n]: " ans
+
+if [ "$ans" = "y" ]; then
+	echo "Applying permissions"
+	sudo chmod a+wr /var/lib/flatpak/app/com.spotify.Client/x86_64/stable/active/files/extra/share/spotify
+	sudo chmod a+wr -R /var/lib/flatpak/app/com.spotify.Client/x86_64/stable/active/files/extra/share/spotify/Apps
 fi
