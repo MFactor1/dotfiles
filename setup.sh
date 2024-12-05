@@ -1,31 +1,31 @@
 #!/usr/bin/bash
 USER=`whoami`
-if [ -f "../../.zshrc" ]; then
+if [ -e "../../.zshrc" ]; then
     echo "Removing existing ~/.zshrc"
     rm /home/$USER/.zshrc
 fi
 
-if [ ! -d "../../.config" ]; then
+if [ ! -e "../../.config" ]; then
     echo "No existing ~/.config folder, creating one"
     mkdir /home/$USER/.config
 fi
 
-if [ -f "../../.config/starship.toml" ]; then
+if [ -e "../../.config/starship.toml" ]; then
     echo "Removing existing ~/.config/starship.toml"
     rm /home/$USER/.config/starship.toml
 fi
 
-if [ -f "../../.bashrc" ]; then
+if [ -e "../../.bashrc" ]; then
     echo "Removing existing ~/.bashrc"
     rm /home/$USER/.bashrc
 fi
 
-if [ -d "../../.config/warp-terminal" ]; then
+if [ -e "../../.config/warp-terminal" ]; then
     echo "Removing existing ~/.config/warp-terminal"
     rm -r /home/$USER/.config/warp-terminal
 fi
 
-if [ -d "../../.themes" ]; then
+if [ -e "../../.themes" ]; then
     echo "Removing existing ~/.themes"
     rm -r /home/$USER/.themes
 fi
@@ -35,17 +35,17 @@ fi
 #    rm -r /home/$USER/.vscode
 #fi
 
-if [ -d "/home/$USER/.local/share/icons" ]; then
+if [ -e "/home/$USER/.local/share/icons" ]; then
 	echo "Removing existing ~/.local/share/icons"
 	rm -r /home/$USER/.local/share/icons
 fi
 
-if [ -d "../../Pictures/wallpapers" ]; then
+if [ -e "../../Pictures/wallpapers" ]; then
 	echo "Removing existing wallpapers folder"
 	rm -r /home/$USER/Pictures/wallpapers
 fi
 
-if [ -d "../../.spicetify/Themes" ]; then
+if [ -e "../../.spicetify/Themes" ]; then
 	echo "Removing existing ~/.config/spicetify/Themes folder"
 	rm -r /home/$USER/.config/spicetify/Themes
 fi
@@ -54,7 +54,7 @@ if [ ! -d "../../.spicetify" ]; then
 	echo "No existing ~/.spicetify folder. Please install Spicetify if you would like to Symlink Spicetify themes: https://spicetify.app/docs/advanced-usage/installation"
 fi
 
-if [ -d "../../.config/gtk-4.0" ]; then
+if [ -e "/home/$USER/.config/gtk-4.0" ]; then
 	echo "Removing existing ~/.config/gtk-4.0 folder"
 	rm -r /home/$USER/.config/gtk-4.0
 fi
@@ -83,9 +83,6 @@ ln -s ../../gitrepos/dotfiles/icons /home/$USER/.local/share/icons
 echo "Symlinking wallpapers"
 ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers
 
-echo "Symlinking ~/.config/gtk-4.0"
-ln -s ../gitrepos/dotfiles/gtk-4.0 /home/$USER/.config/gtk-4.0
-
 if [ -d "../../.config/spicetify" ]; then
 	echo "Symlinking ~/.config/spicetify/Themes"
 	ln -s ../../gitrepos/dotfiles/Themes /home/$USER/.config/spicetify/Themes
@@ -96,6 +93,18 @@ if [ -d "/home/$USER/.config/vesktop" ]; then
 	rm -rf "/home/$USER/.config/vesktop/themes"
 	echo "Symlinking ~/.config/vesktop/themes"
 	ln -s ../../gitrepos/dotfiles/vesktop_themes /home/$USER/.config/vesktop/themes
+fi
+
+read -p "Would you like to apply Rose Pine or Catppuccin for GTK 4? [R/C]: " ans
+
+if [ "$ans" = "R" ]; then
+	echo "Applying GTK 4 Rose Pine theme"
+	ln -s ../gitrepos/dotfiles/gtk-4.0-rosepine /home/$USER/.config/gtk-4.0
+fi
+
+if [ "$ans" = "C" ]; then
+	echo "Applying GTK 4 Catppuccin theme"
+	ln -s ../gitrepos/dotfiles/gtk-4.0-catppuccin /home/$USER/.config/gtk-4.0
 fi
 
 read -p "Would you like to apply flatpak custom cursor workaround?[y/n]: " ans
