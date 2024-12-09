@@ -33,6 +33,28 @@ vim.opt.signcolumn = 'yes:2'
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
+vim.api.nvim_create_augroup("typescriptindent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "typescriptindent",
+    pattern = "typescript",
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
+
+vim.api.nvim_create_augroup("javascriptindent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "javascriptindent",
+    pattern = "javascript",
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
+
 local keyset = vim.keymap.set
 
 -- catppuccin setup
