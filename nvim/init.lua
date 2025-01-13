@@ -11,6 +11,8 @@ Plug('Bekaboo/dropbar.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
 Plug('lewis6991/gitsigns.nvim')
 Plug('lervag/vimtex')
+Plug('leafgarland/typescript-vim')
+Plug('peitalin/vim-jsx-typescript')
 
 vim.call('plug#end')
 
@@ -22,7 +24,16 @@ vim.opt.swapfile = false
 vim.opt.wrap = false
 
 -- coc auto install extensions
-vim.g.coc_global_extensions = {'coc-json', 'coc-sh', 'coc-pyright', 'coc-zig', 'coc-cmake', 'coc-java'}
+vim.g.coc_global_extensions = {
+	'coc-json',
+	'coc-sh',
+	'coc-pyright',
+	'coc-zig',
+	'coc-cmake',
+	'coc-java',
+	'coc-tsserver',
+	'coc-html'
+}
 
 -- setup left side columm
 vim.opt.number = true
@@ -33,6 +44,13 @@ vim.opt.signcolumn = 'yes:2'
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
+-- Set filetypes as typescriptreact for .tsx and .jsx files
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = { "*.tsx", "*.jsx" },
+    command = "set filetype=typescriptreact",
+})
+
+-- Set TS indenting
 vim.api.nvim_create_augroup("typescriptindent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "typescriptindent",
@@ -44,6 +62,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Set JS indenting
 vim.api.nvim_create_augroup("javascriptindent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "javascriptindent",
@@ -54,6 +73,31 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.shiftwidth = 2
     end,
 })
+
+-- Set TSX indenting
+vim.api.nvim_create_augroup("typescriptreactindent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "typescriptreactindent",
+    pattern = "typescriptreact",
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
+
+-- Set JSX indenting
+vim.api.nvim_create_augroup("javascriptreactindent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "javascriptreactindent",
+    pattern = "javascriptreact",
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
+
 
 local keyset = vim.keymap.set
 
