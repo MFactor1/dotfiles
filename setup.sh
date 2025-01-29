@@ -59,6 +59,11 @@ if [ -e "/home/$USER/.config/gtk-4.0" ]; then
 	rm -r /home/$USER/.config/gtk-4.0
 fi
 
+if [ -e "/home/$USER/.config/ghostty/config" ]; then
+	echo "Removing existing ~/.config/ghostty/config file"
+	rm -r /home/$USER/.config/ghostty/config
+fi
+
 echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
@@ -93,6 +98,11 @@ if [ -d "/home/$USER/.config/vesktop" ]; then
 	rm -rf "/home/$USER/.config/vesktop/themes"
 	echo "Symlinking ~/.config/vesktop/themes"
 	ln -s ../../gitrepos/dotfiles/vesktop_themes /home/$USER/.config/vesktop/themes
+fi
+
+if [ -d "/home/$USER/.config/ghostty" ]; then
+	echo "Symlinking ~/.config/ghostty/config"
+	ln -s ../../gitrepos/dotfiles/ghostty_config /home/$USER/.config/ghostty/config
 fi
 
 read -p "Would you like to apply Rose Pine or Catppuccin for GTK 4? [R/C]: " ans
