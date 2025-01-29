@@ -105,14 +105,14 @@ if [ -d "/home/$USER/.config/ghostty" ]; then
 	ln -s ../../gitrepos/dotfiles/ghostty_config /home/$USER/.config/ghostty/config
 fi
 
-read -p "Would you like to apply Rose Pine or Catppuccin for GTK 4? [R/C]: " ans
+read -p "Would you like to apply Rose Pine or Catppuccin for GTK 4? [r/c]: " ans
 
-if [ "$ans" = "R" ]; then
+if [ "$ans" = "r" ]; then
 	echo "Applying GTK 4 Rose Pine theme"
 	ln -s ../gitrepos/dotfiles/gtk-4.0-rosepine /home/$USER/.config/gtk-4.0
 fi
 
-if [ "$ans" = "C" ]; then
+if [ "$ans" = "c" ]; then
 	echo "Applying GTK 4 Catppuccin theme"
 	ln -s ../gitrepos/dotfiles/gtk-4.0-catppuccin /home/$USER/.config/gtk-4.0
 fi
