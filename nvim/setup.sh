@@ -29,4 +29,4 @@ if [ ! -d "/usr/local/lib/node_modules/sql-language-server" ]; then
 	sudo npm i -g sql-language-server
 fi
 
-nvim -c ":PlugInstall"
+nvim -c ":PlugInstall" -c ":PlugUpdate"

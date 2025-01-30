@@ -7,8 +7,9 @@ Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
-Plug('Bekaboo/dropbar.nvim')
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
+Plug('MunifTanjim/nui.nvim')
+Plug('Bekaboo/dropbar.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
 Plug('lewis6991/gitsigns.nvim')
 Plug('lervag/vimtex')
@@ -139,16 +140,42 @@ require("catppuccin").setup({
 vim.cmd('colorscheme catppuccin')
 
 -- sidebar git change indicators
-require('gitsigns').setup {
+require('gitsigns').setup({
 	signs = {
 		sign_priority = 1000,
 	},
-}
+})
 
 -- vertical tabspace lines
 require("ibl").setup()
 
-require("dropbar").setup()
+require("dropbar").setup({
+	bar = {
+		enable = true,
+		sources = function(buf, _)
+		  local sources = require('dropbar.sources')
+		  local utils = require('dropbar.utils')
+		  if vim.bo[buf].ft == 'markdown' then
+			return {
+			  sources.path,
+			  sources.lsp,
+			  sources.treesitter,
+			  sources.markdown,
+			}
+		  end
+		  if vim.bo[buf].buftype == 'terminal' then
+			return {
+			  sources.terminal,
+			}
+		  end
+		  return {
+			sources.path,
+			sources.lsp,
+			sources.treesitter,
+		  }
+		end,
+	}
+})
 
 -- autocomplete
 function _G.check_back_space()
