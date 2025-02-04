@@ -34,7 +34,8 @@ vim.g.coc_global_extensions = {
 	'coc-cmake',
 	'coc-java',
 	'coc-tsserver',
-	'coc-html'
+	'coc-html',
+	'coc-clangd'
 }
 
 -- setup left side columm
