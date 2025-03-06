@@ -101,6 +101,17 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Set XML indenting
+vim.api.nvim_create_augroup("xmlindent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "xmlindent",
+    pattern = "xml",
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
 
 local keyset = vim.keymap.set
 
