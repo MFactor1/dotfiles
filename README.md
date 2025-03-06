@@ -8,3 +8,4 @@
 ####   - VSCode (.vscode)
 ####   - Icons & Cursors (.icons)
 ####   - Spicetify (.spicetify/Themes)
+#### And others not listed here...
