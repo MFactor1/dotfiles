@@ -2,23 +2,24 @@
 
 
 format = """\
-[ matt ](bg:#ED8796 fg:#494D64)\
-[](fg:#ED8796 bg:#494D64)\
-$time\
-[](fg:#494D64 bg:#A5ADCB)\
+[ mnesbitt ](bg:#c4a7e7 fg:#2a273f)\
+[](fg:#c4a7e7 bg:#2a273f)\
+$git_branch\
+[](fg:#2a273f bg:#e0def4)\
 $directory\
-[ ](fg:#A5ADCB bg:#1E1E2E)\
+[ ](fg:#e0def4 bg:#1E1E2E)\
 $character
 """
 
 [directory]
 format = "[ $path ]($style)"
-style = "fg:#494D64 bg:#A5ADCB"
+style = "fg:#2a273f bg:#e0def4"
 
 [git_branch]
-format = '[ $symbol$branch(:$remote_branch) ]($style)'
+format = '[ $symbol$branch(:$remote_branch) ]($style) [$fallback]($style)'
 symbol = "  "
-style = "fg:#1C3A5E bg:#FCF392"
+style = "fg:#c4a7e7 bg:#2a273f"
+fallback = "zsh"
 
 [git_status]
 format = '[$all_status]($style)'
@@ -46,5 +47,5 @@ error_symbol = '[ ✗](#E84D44) '
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
-style = "bg:#494D64"
-format = '[[ zsh ](bg:#494D64 fg:#A5ADCB)]($style)'
+style = "bg:#2a273f"
+format = '[[ zsh ](bg:#2a273f fg:#A5ADCB)]($style)'

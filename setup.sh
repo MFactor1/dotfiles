@@ -67,9 +67,6 @@ fi
 echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
-echo "Symlinking ~/.config/starship.toml"
-ln -s ../gitrepos/dotfiles/starship.toml /home/$USER/.config/starship.toml
-
 echo "Symlinking ~/.bashrc"
 ln -s gitrepos/dotfiles/.bashrc /home/$USER/.bashrc
 
@@ -105,7 +102,7 @@ if [ -d "/home/$USER/.config/ghostty" ]; then
 	ln -s ../../gitrepos/dotfiles/ghostty_config /home/$USER/.config/ghostty/config
 fi
 
-read -p "Would you like to apply Rose Pine or Catppuccin for GTK 4? [r/c]: " ans
+read -p "Rose Pine (broken) or Catppuccin for GTK 4? [r/c]: " ans
 
 if [ "$ans" = "r" ]; then
 	echo "Applying GTK 4 Rose Pine theme"
@@ -115,6 +112,18 @@ fi
 if [ "$ans" = "c" ]; then
 	echo "Applying GTK 4 Catppuccin theme"
 	ln -s ../gitrepos/dotfiles/gtk-4.0-catppuccin /home/$USER/.config/gtk-4.0
+fi
+
+read -p "Rose Pine or Catppuccin for Starship? [r/c]: " ans
+
+if [ "$ans" = "r" ]; then
+	echo "Symlinking ~/.config/starship.toml to ./starship/rosepine.toml"
+	ln -s ../gitrepos/dotfiles/starship/rosepine.toml /home/$USER/.config/starship.toml
+fi
+
+if [ "$ans" = "c" ]; then
+	echo "Symlinking ~/.config/starship.toml to ./starship/catppuccin.toml"
+	ln -s ../gitrepos/dotfiles/starship/catppuccin.toml /home/$USER/.config/starship.toml
 fi
 
 read -p "Would you like to apply flatpak custom cursor workaround?[y/n]: " ans
