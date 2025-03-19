@@ -18,6 +18,9 @@ Plug('peitalin/vim-jsx-typescript')
 
 vim.call('plug#end')
 
+-- import the selected theme selection (this can change based on setup options)
+require('selected-theme')
+
 vim.g.mapleader = " "
 vim.g.vimtex_mappings_prefix = "\\"
 vim.g.vimtex_view_method = "general"
@@ -114,42 +117,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local keyset = vim.keymap.set
-
--- catppuccin setup
-require("catppuccin").setup({
-	flavour = "mocha",
-	styles = {
-		comments = { "italic" },
-		functions = { "bold" },
-		keywords = { "italic" },
-		operators = { "bold" },
-		conditionals = { "bold" },
-		loops = { "bold" },
-		booleans = { "bold", "italic" },
-		numbers = {},
-		types = {},
-		strings = {},
-		variables = {},
-		properties = {},
-	},
-	--[[
-	color_overrides = {
-		mocha = {
-			base = "#000000",
-			mantle = "#000000",
-			crust = "#000000",
-		},
-	},
-	]]--
-	integrations = {
-		coc_nvim = true,
-		telescope = {
-			enabled = true,
-		},
-	},
-})
-
-vim.cmd('colorscheme catppuccin')
 
 -- sidebar git change indicators
 require('gitsigns').setup({

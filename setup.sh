@@ -97,10 +97,6 @@ if [ -d "/home/$USER/.config/vesktop" ]; then
 	ln -s ../../gitrepos/dotfiles/vesktop_themes /home/$USER/.config/vesktop/themes
 fi
 
-if [ -d "/home/$USER/.config/ghostty" ]; then
-	echo "Symlinking ~/.config/ghostty/config"
-	ln -s ../../gitrepos/dotfiles/ghostty_config /home/$USER/.config/ghostty/config
-fi
 
 read -p "Rose Pine (broken) or Catppuccin for GTK 4? [r/c]: " ans
 
@@ -112,6 +108,20 @@ fi
 if [ "$ans" = "c" ]; then
 	echo "Applying GTK 4 Catppuccin theme"
 	ln -s ../gitrepos/dotfiles/gtk-4.0-catppuccin /home/$USER/.config/gtk-4.0
+fi
+
+if [ -d "/home/$USER/.config/ghostty" ]; then
+	read -p "Rose Pine or Catppuccin for ghostty? [r/c]: " ans
+
+	if [ "$ans" = "r" ]; then
+		echo "Symlinking ~/.config/ghostty/config"
+		ln -s ../../gitrepos/dotfiles/ghostty/rosepine /home/$USER/.config/ghostty/config
+	fi
+
+	if [ "$ans" = "c" ]; then
+		echo "Symlinking ~/.config/ghostty/config"
+		ln -s ../../gitrepos/dotfiles/ghostty/catppuccin /home/$USER/.config/ghostty/config
+	fi
 fi
 
 read -p "Rose Pine or Catppuccin for Starship? [r/c]: " ans
