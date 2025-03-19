@@ -7,9 +7,11 @@ format = """\
 $git_branch$git_metrics${custom.nogit}\
 [](fg:#2a273f bg:#e0def4)\
 $directory\
-[ ](fg:#e0def4 bg:#1E1E2E)\
+[ ](fg:#e0def4 bg:#191724)\
 $character
 """
+
+command_timeout = 1000
 
 [directory]
 format = "[ $path ]($style)"
