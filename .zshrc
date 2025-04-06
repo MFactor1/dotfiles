@@ -14,6 +14,10 @@ export PATH=$PATH:/home/$USER/bin
 export PATH=$PATH:/home/$USER/.cargo/bin
 export PATH=$PATH:/home/$USER/.local/bin
 
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 up() {
 	declare -i d=${@:-1}
 	(( $d < 0 )) && (>&2 echo "up: Error: negative value provided") && return 1;
