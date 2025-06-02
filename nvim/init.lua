@@ -9,9 +9,9 @@ Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('MunifTanjim/nui.nvim')
-Plug('Bekaboo/dropbar.nvim')
-Plug('lukas-reineke/indent-blankline.nvim')
-Plug('lewis6991/gitsigns.nvim')
+--Plug('Bekaboo/dropbar.nvim')
+--Plug('lukas-reineke/indent-blankline.nvim')
+--Plug('lewis6991/gitsigns.nvim')
 Plug('lervag/vimtex')
 Plug('leafgarland/typescript-vim')
 Plug('peitalin/vim-jsx-typescript')
@@ -118,6 +118,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local keyset = vim.keymap.set
 
+--[[
 -- sidebar git change indicators
 require('gitsigns').setup({
 	signs = {
@@ -155,6 +156,7 @@ require("dropbar").setup({
 		end,
 	}
 })
+]]--
 
 -- autocomplete
 function _G.check_back_space()
