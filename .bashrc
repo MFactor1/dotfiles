@@ -11,6 +11,8 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
+eval "$(starship init bash)"
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -41,4 +43,4 @@ irebase() {
 	git rebase -i HEAD~$1
 }
 alias purge-repo='purge_repo_cache'
-
+alias cp='cp -r'

@@ -35,4 +35,5 @@ irebase() {
 }
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
-
+alias purge-docker='docker system prune -a --volumes'
+alias purge-bak='rm ./**/*.py.bak'
