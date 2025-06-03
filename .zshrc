@@ -30,10 +30,17 @@ purge_repo_cache() {
 	git clean -dfx
 	cd "$original_path"
 }
+
 irebase() {
 	git rebase -i HEAD~$1
 }
+
+terminfo() {
+	infocmp -x xterm-ghostty | ssh $1 -- tic -x -
+}
+
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
 alias purge-docker='docker system prune -a --volumes'
 alias purge-bak='rm ./**/*.py.bak'
+alias enter='make -f makefile.container enter TERM=xterm-256color'
