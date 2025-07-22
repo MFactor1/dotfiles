@@ -42,5 +42,8 @@ terminfo() {
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
 alias purge-docker='docker system prune -a --volumes'
+alias docker-kill='docker kill $(docker ps -a -q)'
 alias purge-bak='rm ./**/*.py.bak'
 alias container='make -f makefile.container TERM=xterm-256color'
+alias reset-vpn='sudo systemctl restart wg-quick@oracle-dev wg-quick@wg0'
+alias ping-vpn='ping -w 3 10.0.0.1 && ping -w 3 10.0.5.1'
