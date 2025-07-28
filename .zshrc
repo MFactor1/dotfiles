@@ -90,7 +90,17 @@ function test_local() {
 }
 
 function test_system() {
-    local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
+	patch_systems()
+
+    echo "Starting test suites..."
+
+    # Run tests in separate Ghostty terminals
+    ghostty -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container level1 DCSERVER=10.8.3.191; echo 'level1 tests complete, press ENTER to close'; read line" &
+    ghostty -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container api DCSERVER=10.8.3.52; echo 'api tests complete, press ENTER to close'; read line" &
+}
+
+function patch_systems() {
+	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
     local test_dir="$HOME/gitrepos/mn-server/tests"
 	local build_dir="$repo_dir/build"
 	# Remove existing builds before building
@@ -133,12 +143,6 @@ function test_system() {
     # Wait for both installations to complete
     wait $install1_pid $install2_pid
     echo "Remote installations and clearall complete."
-
-    echo "Starting test suites..."
-
-    # Run tests in separate Ghostty terminals
-    ghostty -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container level1 DCSERVER=10.8.3.191; echo 'level1 tests complete, press ENTER to close'; read line" &
-    ghostty -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container api DCSERVER=10.8.3.52; echo 'api tests complete, press ENTER to close'; read line" &
 }
 
 up() {
@@ -162,8 +166,13 @@ terminfo() {
 	infocmp -x xterm-ghostty | ssh $1 -- tic -x -
 }
 
+glog() {
+	git log --oneline -$1
+}
+
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
+alias scp='scp -r'
 alias purge-docker='docker system prune -a --volumes'
 alias docker-kill='docker kill $(docker ps -a -q)'
 alias purge-bak='rm ./**/*.py.bak'
@@ -173,3 +182,4 @@ alias ping-vpn='ping -w 3 10.0.0.1 && ping -w 3 10.0.5.1'
 alias test-full='test_full'
 alias test-system='test_system'
 alias test-local='test_local'
+alias patch-systems='patch_systems'
