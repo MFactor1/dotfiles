@@ -90,7 +90,49 @@ function test_local() {
 }
 
 function test_system() {
-	patch_systems()
+	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
+    local test_dir="$HOME/gitrepos/mn-server/tests"
+	local build_dir="$repo_dir/build"
+	# Remove existing builds before building
+	rm -rf $build_dir
+    # Run the deb build in a new terminal and wait for it to complete
+    ghostty -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container deb" &
+
+    # Wait for deb build to complete by monitoring the deb file
+    echo "Waiting for deb build to complete..."
+    while [[ ! -d "$build_dir" ]]; do
+		echo "Waiting for deb build to complete..."
+        sleep 5
+    done
+
+    # Get the actual deb filename
+    local deb_file=$(ls $build_dir/dcscommander_*.deb | head -1)
+    local deb_name=$(basename "$deb_file")
+
+    echo "Deb build complete. Found: $deb_name"
+    echo "Copying deb files to servers..."
+
+    # SCP files to both servers in parallel
+    scp "$deb_file" ubuntu@10.8.3.52:~/auto/ &
+    local scp1_pid=$!
+    scp "$deb_file" ubuntu@10.8.3.191:~/auto/ &
+    local scp2_pid=$!
+
+    # Wait for both SCP operations to complete
+    wait $scp1_pid $scp2_pid
+    echo "SCP operations complete."
+
+    echo "Installing packages and running clearall on servers..."
+
+    # Install and run clearall on both servers in parallel
+    ssh ubuntu@10.8.3.52 "sudo dpkg -i ~/auto/$deb_name && sudo dcs clearall" &
+    local install1_pid=$!
+    ssh ubuntu@10.8.3.191 "sudo dpkg -i ~/auto/$deb_name && sudo dcs clearall" &
+    local install2_pid=$!
+
+    # Wait for both installations to complete
+    wait $install1_pid $install2_pid
+    echo "Remote installations and clearall complete."
 
     echo "Starting test suites..."
 
