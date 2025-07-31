@@ -30,9 +30,15 @@ purge_repo_cache() {
 	git clean -dfx
 	cd "$original_path"
 }
+
 irebase() {
 	git rebase -i HEAD~$1
 }
+
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
-
+alias scp='scp -r'
+alias ls='eza --all'
+alias tree='eza --tree --all'
+alias ll='eza --all --long --total-size'
+alias tokei='tokei --sort code'
