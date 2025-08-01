@@ -18,33 +18,49 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+unit_sig_file="/tmp/unit.done"
+integ_sig_file="/tmp/integration.done"
+lvl1_sig_file="/tmp/level1.done"
+api_sig_file="/tmp/api.done"
+cmdr_dir="$HOME/gitrepos/mn-server/dcscommander"
+test_dir="$HOME/gitrepos/mn-server/tests"
+build_dir="$cmdr_dir/build"
+cmdr_venv_done="$cmdr_dir/venv/dcscommander.installed"
+sys_venv_done="$test_dir/venv/dc_system_tests.installed"
+repo_make="$cmdr_dir/makefile.container"
+test_make="$test_dir/makefile.container"
+fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
+
 function test_full() {
-    local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-	local cmdr_venv_done="$repo_dir/venv/dcscommander.installed"
-	local sys_venv_done="$test_dir/venv/dc_system_tests.installed"
-
+	rm_sig_files
+	add_api_key
+	docker-kill
 	build_all_venv
-
-    # Open Ghostty terminals and run the make commands
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		pwd && cd $repo_dir && pwd && make -f makefile.container unit
-		echo 'Unit tests complete, press ENTER to close'
-		read line
-		" &
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
-		pwd && cd $repo_dir && pwd && make -f makefile.container integration
-		echo 'Integration tests complete, press ENTER to close'
-		read line
-		" &
 
 	# Remove existing builds before building
 	rm -rf $build_dir
     # Run the deb build in a new terminal and wait for it to complete
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		pwd && cd $repo_dir && pwd && make -f makefile.container deb
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="deb build" -- bash -c "
+		make -f makefile.container deb
+	" &
+
+    # Run unit/integration tests
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -- bash -c "
+		make -f makefile.container unit
+		echo 'Unit tests complete, press ENTER to close'
+		touch $unit_sig_file
+		read line
+	" &
+	while [[ ! -f "$unit_sig_file" ]]; do
+		echo "Waiting for unit tests to complete..."
+		sleep 5
+	done
+
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="integration suite" -- bash -c "
+		make -f makefile.container integration
+		echo 'Integration tests complete, press ENTER to close'
+		touch $integ_sig_file
+		read line
 	" &
 
     # Wait for deb build to complete by monitoring the deb file
@@ -86,107 +102,119 @@ function test_full() {
     echo "Starting test suites..."
 
     # Run tests in separate Ghostty terminals
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		pwd && cd $test_dir && pwd && make -f makefile.container level1 DCSERVER=10.8.3.191
+    flatpak run app.devsuite.Ptyxis -d $test_dir --title="level1 suite" -- bash -c "
+		make -f makefile.container level1 DCSERVER=10.8.3.191
 		echo 'level1 tests complete, press ENTER to close'
+		touch $lvl1_sig_file
 		read line
 	" &
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		pwd && cd $test_dir && pwd && make -f makefile.container api DCSERVER=10.8.3.52
+	while [[ ! -f "$lvl1_sig_file" ]]; do
+		echo "Waiting for integration tests to complete..."
+		sleep 5
+	done
+
+    flatpak run app.devsuite.Ptyxis -d $test_dir --title="api suite" -- bash -c "
+		make -f makefile.container api DCSERVER=10.8.3.52
 		echo 'api tests complete, press ENTER to close'
+		touch $api_sig_file
 		read line
-		" &
+	" &
+	while [[ ! -f "$api_sig_file" || ! -f "$integ_sig_file" ]]; do
+		echo "Waiting for final tests to complete"
+		sleep 5
+	done
+
+	rm_api_key
 }
 
 function test_unit() {
-    local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-
+	rm_sig_files
 	build_cmdr_venv
 
     # Open Ghostty terminals and run the make commands
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container unit; echo 'Unit tests complete, press ENTER to close'; read line" &
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -e bash -c "
+		make -f makefile.container unit
+		echo 'Unit tests complete, press ENTER to close'
+		read line
+	" &
 }
 
 function test_local() {
-    local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-
+	rm_sig_files
+	add_api_key
+	docker-kill
 	build_cmdr_venv
 
     # Open Ghostty terminals and run the make commands
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container unit; echo 'Unit tests complete, press ENTER to close'; read line" &
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container integration; echo 'Integration tests complete, press ENTER to close'; read line" &
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -- bash -c "
+	make -f makefile.container unit
+	echo 'Unit tests complete, press ENTER to close'
+	touch $unit_sig_file
+	read line
+	" &
+	while [[ ! -f "$unit_sig_file" ]]; do
+		echo "Waiting for unit tests to complete..."
+		sleep 5
+	done
+
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="integration suite" -- bash -c "
+	make -f makefile.container integration
+	echo 'Integration tests complete, press ENTER to close'
+	touch $integ_sig_file
+	read line
+	" &
+	while [[ ! -f "$integ_sig_file" ]]; do
+		echo "Waiting for integration tests to complete..."
+		sleep 5
+	done
+
+	rm_api_key
 }
 
 function test_system() {
-	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-
+	rm_sig_files
+	add_api_key
 	build_test_venv
 
-	# Remove existing builds before building
-	rm -rf $build_dir
-    # Run the deb build in a new terminal and wait for it to complete
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container deb" &
-
-    # Wait for deb build to complete by monitoring the deb file
-    echo "Waiting for deb build to complete..."
-    while [[ ! -d "$build_dir" ]]; do
-		echo "Waiting for deb build to complete..."
-        sleep 5
-    done
-
-    # Get the actual deb filename
-    local deb_file=$(ls $build_dir/dcscommander_*.deb | head -1)
-    local deb_name=$(basename "$deb_file")
-
-    echo "Deb build complete. Found: $deb_name"
-    echo "Copying deb files to servers..."
-
-    # SCP files to both servers in parallel
-    scp "$deb_file" ubuntu@10.8.3.52:~/auto/ &
-    local scp1_pid=$!
-    scp "$deb_file" ubuntu@10.8.3.191:~/auto/ &
-    local scp2_pid=$!
-
-    # Wait for both SCP operations to complete
-    wait $scp1_pid $scp2_pid
-    echo "SCP operations complete."
-
-    echo "Installing packages and running clearall on servers..."
-
-    # Install and run clearall on both servers in parallel
-    ssh ubuntu@10.8.3.52 "sudo dpkg -i ~/auto/$deb_name && sudo dcs clearall" &
-    local install1_pid=$!
-    ssh ubuntu@10.8.3.191 "sudo dpkg -i ~/auto/$deb_name && sudo dcs clearall" &
-    local install2_pid=$!
-
-    # Wait for both installations to complete
-    wait $install1_pid $install2_pid
-    echo "Remote installations and clearall complete."
+	patch_systems
 
     echo "Starting test suites..."
 
     # Run tests in separate Ghostty terminals
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container level1 DCSERVER=10.8.3.191; echo 'level1 tests complete, press ENTER to close'; read line" &
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $test_dir && pwd && make -f makefile.container api DCSERVER=10.8.3.52; echo 'api tests complete, press ENTER to close'; read line" &
+    flatpak run app.devsuite.Ptyxis -d $test_dir --title="level1 suite" -- bash -c "
+		make -f makefile.container level1 DCSERVER=10.8.3.191
+		echo 'level1 tests complete, press ENTER to close'
+		touch $lvl1_sig_file
+		read line
+	" &
+	while [[ ! -f "$lvl1_sig_file" ]]; do
+		echo "Waiting for integration tests to complete..."
+		sleep 5
+	done
+
+    flatpak run app.devsuite.Ptyxis -d $test_dir --title="api suite" -- bash -c "
+		make -f makefile.container api DCSERVER=10.8.3.52
+		echo 'api tests complete, press ENTER to close'
+		touch $api_sig_file
+		read line
+	" &
+	while [[ ! -f "$api_sig_file" ]]; do
+		echo "Waiting for integration tests to complete..."
+		sleep 5
+	done
+
+	rm_api_key
 }
 
 function patch_systems() {
-	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-
 	build_test_venv
 
 	# Remove existing builds before building
 	rm -rf $build_dir
     # Run the deb build in a new terminal and wait for it to complete
-    flatpak run app.devsuite.Ptyxis -e bash -c "pwd && cd $repo_dir && pwd && make -f makefile.container deb" &
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="deb build" -- bash -c "
+		make -f makefile.container deb
+	" &
 
     # Wait for deb build to complete by monitoring the deb file
     echo "Waiting for deb build to complete..."
@@ -226,28 +254,20 @@ function patch_systems() {
 }
 
 function build_test_venv() {
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local sys_venv_done="$test_dir/venv/dc_system_tests.installed"
-
 	build_venv $test_dir $sys_venv_done
 }
 
 function build_cmdr_venv() {
-	local cmdr_dir="$HOME/gitrepos/mn-server/dcscommander"
-	local cmdr_venv_done="$cmdr_dir/venv/dcscommander.installed"
-
 	build_venv $cmdr_dir $cmdr_venv_done
 }
 
 function build_venv() {
-	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
 	rm -rf $2
 
-	add_api_key
 	add_venv
 
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		pwd && cd $1 && pwd && make -f makefile.container venv
+    flatpak run app.devsuite.Ptyxis -d $1 --title="Venv Build" -- bash -c "
+		make -f makefile.container venv
 	" &
 
 	echo "Waiting for venv build to complete..."
@@ -256,30 +276,21 @@ function build_venv() {
         sleep 5
     done
 
-	rm_api_key
 	rm_venv
 }
 
 function build_all_venv() {
-	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
-    local test_dir="$HOME/gitrepos/mn-server/tests"
-	local build_dir="$repo_dir/build"
-	local cmdr_venv_done="$repo_dir/venv/dcscommander.installed"
-	local sys_venv_done="$test_dir/venv/dc_system_tests.installed"
 	rm -rf $cmdr_venv_done
 	rm -rf $sys_venv_done
 
-	add_api_key
 	add_venv
 
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
-		pwd && cd $repo_dir && pwd && make -f makefile.container venv
+    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="Venv Build" -- bash -c "
+		make -f makefile.container venv
 	" &
 
-    flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
-		pwd && cd $test_dir && pwd && make -f makefile.container venv
+    flatpak run app.devsuite.Ptyxis -d $test_dir --title="Venv Build" -- bash -c "
+		make -f makefile.container venv
 	" &
 
 	echo "Waiting for venv builds to complete..."
@@ -288,14 +299,11 @@ function build_all_venv() {
         sleep 5
     done
 
-	rm_api_key
 	rm_venv
 }
 
 function add_venv() {
 	echo "Adding venv inner targets"
-	local repo_make="$HOME/gitrepos/mn-server/dcscommander/makefile.container"
-	local test_make="$HOME/gitrepos/mn-server/tests/makefile.container"
 
 	if ! grep "^INNER_TARGETS" "$repo_make" | grep -q "venv"; then
 		sed -i 's/^\(INNER_TARGETS.*$\)/\1 venv/' "$repo_make"
@@ -308,8 +316,6 @@ function add_venv() {
 
 function rm_venv() {
 	echo "Removing venv inner targets"
-	local repo_make="$HOME/gitrepos/mn-server/dcscommander/makefile.container"
-	local test_make="$HOME/gitrepos/mn-server/tests/makefile.container"
 
 	if grep "^INNER_TARGETS" "$repo_make" | grep -q "venv"; then
 		sed -i 's/^\(INNER_TARGETS.*\) venv$/\1/' "$repo_make"
@@ -321,16 +327,17 @@ function rm_venv() {
 }
 
 function add_api_key() {
-	local fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
 	local new_key=$(cat $HOME/env/.dcs_env)
 
 	sed -i "s/client_secret=\"\(.*\)\",/client_secret=\"$new_key\",#\1/" "$fixtures"
 }
 
 function rm_api_key() {
-	local fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
-
 	sed -i "s/client_secret=\".*\",#\(.*\)$/client_secret=\"\1\",/" "$fixtures"
+}
+
+function rm_sig_files() {
+	rm -rf $unit_sig_file $integ_sig_file $lvl1_sig_file $api_sig_file
 }
 
 up() {
