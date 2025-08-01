@@ -29,27 +29,22 @@ function test_full() {
 
     # Open Ghostty terminals and run the make commands
     flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
 		pwd && cd $repo_dir && pwd && make -f makefile.container unit
 		echo 'Unit tests complete, press ENTER to close'
 		read line
-		exit 0
 		" &
     flatpak run app.devsuite.Ptyxis -e bash -c "
 		trap 'exit 0' EXIT
 		pwd && cd $repo_dir && pwd && make -f makefile.container integration
 		echo 'Integration tests complete, press ENTER to close'
 		read line
-		exit 0
 		" &
 
 	# Remove existing builds before building
 	rm -rf $build_dir
     # Run the deb build in a new terminal and wait for it to complete
     flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
 		pwd && cd $repo_dir && pwd && make -f makefile.container deb
-		exit 0
 	" &
 
     # Wait for deb build to complete by monitoring the deb file
@@ -92,18 +87,14 @@ function test_full() {
 
     # Run tests in separate Ghostty terminals
     flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
 		pwd && cd $test_dir && pwd && make -f makefile.container level1 DCSERVER=10.8.3.191
 		echo 'level1 tests complete, press ENTER to close'
 		read line
-		exit 0
 	" &
     flatpak run app.devsuite.Ptyxis -e bash -c "
-		trap 'exit 0' EXIT
 		pwd && cd $test_dir && pwd && make -f makefile.container api DCSERVER=10.8.3.52
 		echo 'api tests complete, press ENTER to close'
 		read line
-		exit 0
 		" &
 }
 
@@ -252,6 +243,7 @@ function build_venv() {
 	local repo_dir="$HOME/gitrepos/mn-server/dcscommander"
 	rm -rf $2
 
+	add_api_key
 	add_venv
 
     flatpak run app.devsuite.Ptyxis -e bash -c "
@@ -264,6 +256,7 @@ function build_venv() {
         sleep 5
     done
 
+	rm_api_key
 	rm_venv
 }
 
@@ -276,6 +269,7 @@ function build_all_venv() {
 	rm -rf $cmdr_venv_done
 	rm -rf $sys_venv_done
 
+	add_api_key
 	add_venv
 
     flatpak run app.devsuite.Ptyxis -e bash -c "
@@ -294,6 +288,7 @@ function build_all_venv() {
         sleep 5
     done
 
+	rm_api_key
 	rm_venv
 }
 
@@ -323,6 +318,19 @@ function rm_venv() {
 	if grep "^INNER_TARGETS" "$test_make" | grep -q "venv"; then
 		sed -i 's/^\(INNER_TARGETS.*\) venv$/\1/' "$test_make"
 	fi
+}
+
+function add_api_key() {
+	local fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
+	local new_key=$(cat $HOME/env/.dcs_env)
+
+	sed -i "s/client_secret=\"\(.*\)\",/client_secret=\"$new_key\",#\1/" "$fixtures"
+}
+
+function rm_api_key() {
+	local fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
+
+	sed -i "s/client_secret=\".*\",#\(.*\)$/client_secret=\"\1\",/" "$fixtures"
 }
 
 up() {
