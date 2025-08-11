@@ -26,7 +26,7 @@
 
     "custom/lock": {
         "format": "",
-        "on-click": "hyprlock"
+        "on-click": "loginctl lock-session"
     },
 
 	"custom/media": {
