@@ -1,6 +1,6 @@
 DNF:
 sudo dnf copr enable solopasha/hyprland
-sudo dnf install hyprland hyprpaper hyprlock waybar ghostty cargo pipewire-devel clang git python3.12 python3.10 wireguard-tools nm-connection-editor
+sudo dnf install hyprland hyprpaper hyprlock waybar rofi ghostty cargo pipewire-devel clang git nm-connection-editor
 cargo install wiremix
 
 Docker:
