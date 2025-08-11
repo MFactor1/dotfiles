@@ -94,6 +94,8 @@ ln -s ../gitrepos/dotfiles/rofi /home/$USER/.config/rofi
 echo "Symlinking .config/waybar"
 ln -s ../gitrepos/dotfiles/waybar /home/$USER/.config/waybar
 
+hyprctl reload
+
 if [ -d "../../.config/spicetify" ]; then
 	echo "Symlinking ~/.config/spicetify/Themes"
 	ln -s ../../gitrepos/dotfiles/Themes /home/$USER/.config/spicetify/Themes
