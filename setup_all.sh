@@ -88,6 +88,8 @@ ln -s ../gitrepos/dotfiles/rofi /home/$USER/.config/rofi
 echo "Symlinking .config/waybar"
 ln -s ../gitrepos/dotfiles/waybar /home/$USER/.config/waybar
 
+hyprctl reload
+
 echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
