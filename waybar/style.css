@@ -1,0 +1,170 @@
+@import "rosepine.css";
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 15px;
+  min-height: 0;
+  border-radius: 2rem;
+}
+
+
+window#waybar {
+  background: transparent;
+}
+
+
+#custom-lock {
+	margin: 7px 3px 2px 7px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: @surface0;
+	color: @text;
+}
+
+.custom-spotify {
+  padding: 4px 10px;
+  margin: 7px 3px 2px 7px;
+  background-color: @surface0;
+  color: @text;
+/*  background: linear-gradient(@rosewater,@mauve); */
+}
+
+#workspaces {
+  background-color: @surface0;
+  margin-top: 1rem;
+  margin: 7px 0px 0px 7px;
+  padding-left: 1px;
+  padding-right: 1px;
+  border-radius: 360px;
+}
+
+#workspaces button {
+  color: @surface1;
+  padding-left: 3px;
+  margin: 1px 2px;
+  box-shadow: none;
+  border: 0px;
+  transition: all 0.9s cubic-bezier(.05,0.9,.1,1);
+}
+
+#workspaces button.active {
+  padding-left: 15px;
+  padding-right: 18px;
+  color: @text;
+  border: 0px;
+}
+
+#workspaces button:hover {
+  background-color: alpha(@surface0, 0);
+  border-color: alpha(@surface0, 0);
+  border: 0px;
+  color: #524f67;
+}
+
+#tray {
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0px 0px 0px 0px;
+  background-color: @surface0;
+/*  background: linear-gradient(alpha(@rosewater, 0.7),alpha(@lavender, 1)); */ 
+}
+
+#network,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power {
+  background-color: @surface0;
+  margin: 7px 3px 0px 7px;
+  padding: 8px 5px;
+}
+
+#custom-lock {
+	min-width: 35px;
+}
+
+#clock {
+  background-color: @surface0;
+  color: @text;
+  padding-right: 10px;
+  padding-left: 10px;
+/*  background: linear-gradient(@rosewater,@pink); */
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#network {
+  background-color: @surface0;
+  color: @text;
+  padding-right: 17px;
+  padding-left: 10px;
+/*  background: linear-gradient(@rosewater,@mauve); */
+  color: @text;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#pulseaudio {
+  background-color: @surface0;
+  color: @text;
+  padding-right: 10px;
+  padding-left: 10px;
+/*  background: linear-gradient(@rosewater,@mauve); */
+}
+
+#pulseaudio.muted {
+    color: @red;
+}
+
+#custom-power {
+    border-radius: 1rem;
+    color: @red;
+    margin-bottom: 1rem;
+}
+
+#tray {
+  margin: 7px 8px 2px 7px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+tooltip {
+    background: @surface0;
+    border: 0px solid @pink;
+}
+
+tooltip label {
+    color: @text;
+}
+
+#memory {
+  padding-right: 15px;
+  padding-left: 10px;
+  margin: 7px 3px 2px 7px;
+  background-color: @surface0;
+/*  background: linear-gradient(@pink,@rosewater); */
+  color: @text;
+}
+
+#cpu {
+padding-right: 15px;
+padding-left: 10px;
+margin: 7px 3px 2px 7px;
+background-color: @surface0;
+/* background: linear-gradient(@pink,@rosewater); */
+color: @text;
+}
