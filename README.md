@@ -1,11 +1,5 @@
-# Catppuccin Gnome Dotfiles
+# Personal Dotfiles
 ## Warning!! SETUP.SH OVERWRITES EXISTING DOTFILES
-#### setup.sh is written for my personal dotfile management system and WILL OVERWRITE all other dotfiles for:
-####   - GTK (.themes)
-####   - ZSH (.zshrc)
-####   - Bash (.bashrc)
-####   - Warp Terminal (.config/warp-terminal)
-####   - VSCode (.vscode)
-####   - Icons & Cursors (.icons)
-####   - Spicetify (.spicetify/Themes)
-#### And many others not listed here...
+#### setup.sh is written for my personal dotfile management system and WILL OVERWRITE dotfiles already on your system.
+
+#### This repo contains an unorganized assortment of dotfiles for GNOME, hyprland, and sway.
