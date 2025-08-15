@@ -365,6 +365,16 @@ glog() {
 	git log --oneline -$1
 }
 
+branch-update() {
+	git rebase master
+}
+
+update-continue() {
+	git add .
+	git rebase --continue
+	git push --force
+}
+
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
 alias scp='scp -r'
