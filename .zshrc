@@ -18,6 +18,8 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 unit_sig_file="/tmp/unit.done"
 integ_sig_file="/tmp/integration.done"
 lvl1_sig_file="/tmp/level1.done"
