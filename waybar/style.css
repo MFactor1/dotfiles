@@ -82,7 +82,8 @@ window#waybar {
 }
 
 #custom-lock {
-	min-width: 35px;
+	padding-left: 15px;
+	padding-right: 17px;
 }
 
 #clock {
@@ -95,6 +96,8 @@ window#waybar {
 
 #battery {
   color: @green;
+  padding-right: 12px;
+  padding-left: 10px;
 }
 
 #battery.charging {
@@ -109,7 +112,7 @@ window#waybar {
   background-color: @surface0;
   color: @text;
   padding-right: 17px;
-  padding-left: 10px;
+  padding-left: 7px;
 /*  background: linear-gradient(@rosewater,@mauve); */
   color: @text;
 }
@@ -121,7 +124,7 @@ window#waybar {
 #pulseaudio {
   background-color: @surface0;
   color: @text;
-  padding-right: 10px;
+  padding-right: 6px;
   padding-left: 10px;
 /*  background: linear-gradient(@rosewater,@mauve); */
 }
