@@ -20,6 +20,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+# Add ssh keys (not automatic for whatever reason)
+ssh-add ~/.ssh/id_ed25519 >/dev/null 2&>1
+ssh-add ~/.ssh/azure-dc-dev-test.pem >/dev/null 2&>1
+ssh-add ~/.ssh/oracle-live-media-systems.pem >/dev/null 2&>1
+
 unit_sig_file="/tmp/unit.done"
 integ_sig_file="/tmp/integration.done"
 lvl1_sig_file="/tmp/level1.done"
