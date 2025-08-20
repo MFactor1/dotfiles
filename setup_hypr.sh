@@ -64,6 +64,11 @@ if [ -e "/home/$USER/.config/waybar" ]; then
 	rm -r /home/$USER/.config/waybar
 fi
 
+if [ -e "/home/$USER/.config/scripts" ]; then
+	echo "Removing existing ~/.config/scripts dir"
+	rm -r /home/$USER/.config/scripts
+fi
+
 echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
@@ -93,6 +98,9 @@ ln -s ../gitrepos/dotfiles/rofi /home/$USER/.config/rofi
 
 echo "Symlinking .config/waybar"
 ln -s ../gitrepos/dotfiles/waybar /home/$USER/.config/waybar
+
+echo "Symlinking .config/scripts"
+ln -s ../gitrepos/dotfiles/scripts /home/$USER/.config/scripts
 
 hyprctl reload
 
