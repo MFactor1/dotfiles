@@ -213,7 +213,7 @@
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"on-click": "nm-connection-editor",
+		"on-click": "~/.config/scripts/network_selector.sh",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

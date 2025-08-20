@@ -64,6 +64,11 @@ if [ -e "/home/$USER/.config/ghostty/config" ]; then
 	rm -r /home/$USER/.config/ghostty/config
 fi
 
+if [ -e "/home/$USER/.config/scripts" ]; then
+	echo "Removing existing ~/.config/scripts dir"
+	rm -r /home/$USER/.config/scripts
+fi
+
 echo "Symlinking ~/.zshrc"
 ln -s gitrepos/dotfiles/.zshrc /home/$USER/.zshrc
 
@@ -84,6 +89,9 @@ ln -s ../../gitrepos/dotfiles/icons /home/$USER/.local/share/icons
 
 echo "Symlinking wallpapers"
 ln -s ../gitrepos/dotfiles/wallpapers /home/$USER/Pictures/wallpapers
+
+echo "Symlinking .config/scripts"
+ln -s ../gitrepos/dotfiles/scripts /home/$USER/.config/scripts
 
 if [ -d "../../.config/spicetify" ]; then
 	echo "Symlinking ~/.config/spicetify/Themes"
