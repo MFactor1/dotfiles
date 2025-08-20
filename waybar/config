@@ -6,6 +6,7 @@
     // "width": 2560, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
 	//"output": "DP-3",
+	"reload_style_on_change": true,
     // Choose the order of the modules
     "modules-left": [
         "custom/media",
@@ -20,13 +21,41 @@
 		"pulseaudio",
 		"network",
 		"clock",
-		"custom/lock",
+		"group/powermenu",
 		"tray",
     ],
-
+	"group/powermenu": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 500,
+			"transition-left-to-right": false,
+		},
+		"modules": [
+			"custom/poweroff",
+			"custom/lock",
+			"custom/suspend",
+			"custom/reboot",
+		]
+	},
+    "custom/poweroff": {
+        "format": "",
+        "on-click": "systemctl poweroff",
+		"tooltip-format": "Poweroff",
+    },
+    "custom/reboot": {
+        "format": "",
+        "on-click": "systemctl reboot",
+		"tooltip-format": "Reboot",
+    },
+    "custom/suspend": {
+        "format": "󰤄",
+        "on-click": "systemctl suspend",
+		"tooltip-format": "Suspend",
+    },
     "custom/lock": {
         "format": "",
-        "on-click": "loginctl lock-session"
+        "on-click": "loginctl lock-session",
+		"tooltip-format": "Lock Session",
     },
 
 	"custom/media": {

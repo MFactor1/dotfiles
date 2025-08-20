@@ -2,6 +2,8 @@
 
 * {
   font-family: JetBrainsMono Nerd Font;
+  /*font-family: Hack Nerd Font Mono; */
+  /*font-family: NotoSansM Nerd Font Mono;*/
   font-size: 15px;
   min-height: 0;
   border-radius: 2rem;
@@ -26,7 +28,7 @@ window#waybar {
   margin: 7px 3px 2px 7px;
   background-color: @surface0;
   color: @text;
-/*  background: linear-gradient(@rosewater,@mauve); */
+/*  background: linear-gradient(@iris,@mauve); */
 }
 
 #workspaces {
@@ -61,29 +63,47 @@ window#waybar {
   color: #524f67;
 }
 
-#tray {
-  padding-left: 4px;
-  padding-right: 4px;
-  margin: 0px 0px 0px 0px;
-  background-color: @surface0;
-/*  background: linear-gradient(alpha(@rosewater, 0.7),alpha(@lavender, 1)); */ 
-}
-
 #network,
 #backlight,
 #clock,
 #battery,
 #pulseaudio,
 #custom-lock,
-#custom-power {
+#custom-power,
+#custom-poweroff,
+#custom-reboot,
+#custom-suspend {
   background-color: @surface0;
   margin: 7px 3px 0px 7px;
   padding: 8px 5px;
 }
 
-#custom-lock {
+#custom-lock,
+#custom-reboot,
+#custom-poweroff,
+#custom-suspend {
+	background: transparent;
 	padding-left: 15px;
 	padding-right: 17px;
+}
+#custom-lock {
+	margin: 0px;
+}
+#custom-reboot {
+	margin: 0px;
+}
+#custom-suspend {
+	margin: 0px;
+}
+
+#custom-poweroff {
+	padding-right: 8px;
+	margin: 0px;
+}
+
+#powermenu {
+	background-color: @surface0;
+	margin: 7px 3px 0px 7px;
 }
 
 #clock {
@@ -91,7 +111,7 @@ window#waybar {
   color: @text;
   padding-right: 10px;
   padding-left: 10px;
-/*  background: linear-gradient(@rosewater,@pink); */
+/*  background: linear-gradient(@iris,@pink); */
 }
 
 #battery {
@@ -113,7 +133,7 @@ window#waybar {
   color: @text;
   padding-right: 17px;
   padding-left: 7px;
-/*  background: linear-gradient(@rosewater,@mauve); */
+/*  background: linear-gradient(@iris,@mauve); */
   color: @text;
 }
 
@@ -126,7 +146,7 @@ window#waybar {
   color: @text;
   padding-right: 6px;
   padding-left: 10px;
-/*  background: linear-gradient(@rosewater,@mauve); */
+/*  background: linear-gradient(@iris,@mauve); */
 }
 
 #pulseaudio.muted {
@@ -140,18 +160,21 @@ window#waybar {
 }
 
 #tray {
-  margin: 7px 8px 2px 7px;
-  padding-right: 10px;
-  padding-left: 10px;
+	background-color: @surface0;
+	margin: 7px 13px 0px 7px;
+	padding-right: 13px;
+	padding-left: 13px;
 }
 
 tooltip {
     background: @surface0;
-    border: 0px solid @pink;
+    border: 2px solid @iris;
 }
 
 tooltip label {
     color: @text;
+	padding-right: 9px;
+	padding-left: 9px;
 }
 
 #memory {
@@ -159,15 +182,15 @@ tooltip label {
   padding-left: 10px;
   margin: 7px 3px 2px 7px;
   background-color: @surface0;
-/*  background: linear-gradient(@pink,@rosewater); */
+/*  background: linear-gradient(@pink,@iris); */
   color: @text;
 }
 
 #cpu {
 padding-right: 15px;
 padding-left: 10px;
-margin: 7px 3px 2px 7px;
+margin: 7px 3px 2px 13px;
 background-color: @surface0;
-/* background: linear-gradient(@pink,@rosewater); */
+/* background: linear-gradient(@pink,@iris); */
 color: @text;
 }
