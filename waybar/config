@@ -21,8 +21,8 @@
 		"pulseaudio",
 		"network",
 		"clock",
-		"group/powermenu",
 		"tray",
+		"group/powermenu",
     ],
 	"group/powermenu": {
 		"orientation": "inherit",

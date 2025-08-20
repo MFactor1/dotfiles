@@ -14,15 +14,6 @@ window#waybar {
   background: transparent;
 }
 
-
-#custom-lock {
-	margin: 7px 3px 2px 7px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: @surface0;
-	color: @text;
-}
-
 .custom-spotify {
   padding: 4px 10px;
   margin: 7px 3px 2px 7px;
@@ -73,9 +64,9 @@ window#waybar {
 #custom-poweroff,
 #custom-reboot,
 #custom-suspend {
-  background-color: @surface0;
-  margin: 7px 3px 0px 7px;
-  padding: 8px 5px;
+	background-color: @surface0;
+	margin: 7px 3px 0px 7px;
+	padding: 8px 5px;
 }
 
 #custom-lock,
@@ -84,7 +75,9 @@ window#waybar {
 #custom-suspend {
 	background: transparent;
 	padding-left: 15px;
-	padding-right: 17px;
+	padding-right: 18px;
+	margin: 7px 3px 2px 7px;
+	color: @text;
 }
 #custom-lock {
 	margin: 0px;
@@ -97,13 +90,12 @@ window#waybar {
 }
 
 #custom-poweroff {
-	padding-right: 8px;
 	margin: 0px;
 }
 
 #powermenu {
 	background-color: @surface0;
-	margin: 7px 3px 0px 7px;
+	margin: 7px 13px 0px 7px;
 }
 
 #clock {
@@ -161,7 +153,7 @@ window#waybar {
 
 #tray {
 	background-color: @surface0;
-	margin: 7px 13px 0px 7px;
+	margin: 7px 3px 0px 7px;
 	padding-right: 13px;
 	padding-left: 13px;
 }
