@@ -32,12 +32,16 @@ window#waybar {
 }
 
 #workspaces button {
-  color: @surface1;
-  padding-left: 3px;
-  margin: 1px 2px;
-  box-shadow: none;
-  border: 0px;
-  transition: all 0.9s cubic-bezier(.05,0.9,.1,1);
+	color: @surface1;
+	padding-left: 3px;
+	margin: 1px 2px;
+	box-shadow: none;
+	text-shadow: none;
+	background: none;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	transition: all 0.9s cubic-bezier(.05,0.9,.1,1);
 }
 
 #workspaces button.active {
@@ -48,10 +52,19 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background-color: alpha(@surface0, 0);
-  border-color: alpha(@surface0, 0);
-  border: 0px;
-  color: #524f67;
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	color: @highlight1;
+}
+
+#workspaces button.active:hover {
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	color: @iris;
 }
 
 #network,

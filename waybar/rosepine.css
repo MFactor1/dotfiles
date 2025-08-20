@@ -1,7 +1,3 @@
-@define-color base   #191724;
-@define-color mantle #1f1d2e;
-@define-color crust  #26233a;
-
 @define-color text     #e0def4;
 @define-color subtext0 #a6adc8;
 @define-color subtext1 #bac2de;
@@ -9,6 +5,10 @@
 @define-color surface0 #191724;
 @define-color surface1 #1f1d2e;
 @define-color surface2 #26233a;
+
+@define-color highlight0 #21202e;
+@define-color highlight1 #403d52;
+@define-color highlight2 #524f67;
 
 @define-color foreground0 #6e6a86;
 @define-color foreground1 #908caa;
