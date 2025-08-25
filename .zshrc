@@ -37,6 +37,7 @@ sys_venv_done="$test_dir/venv/dc_system_tests.installed"
 repo_make="$cmdr_dir/makefile.container"
 test_make="$test_dir/makefile.container"
 fixtures="$HOME/gitrepos/mn-server/tests/dctools/src/dctools/fixtures/storage.py"
+current_workspace=$(hyprctl activeworkspace -j | jq -r '.id')
 
 function test_full() {
 	rm_sig_files
@@ -47,28 +48,38 @@ function test_full() {
 	# Remove existing builds before building
 	rm -rf $build_dir
     # Run the deb build in a new terminal and wait for it to complete
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="deb build" -- bash -c "
+    kitty -d $cmdr_dir --title="deb build" -- bash -c "
 		make -f makefile.container deb
 	" &
 
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:deb build
+
     # Run unit/integration tests
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -- bash -c "
+    kitty -d $cmdr_dir --title="unit suite" -- bash -c "
 		make -f makefile.container unit
 		echo 'Unit tests complete, press ENTER to close'
 		touch $unit_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:unit suite
+
 	while [[ ! -f "$unit_sig_file" ]]; do
 		echo "Waiting for unit tests to complete..."
 		sleep 5
 	done
 
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="integration suite" -- bash -c "
+    kitty -d $cmdr_dir --title="integration suite" -- bash -c "
 		make -f makefile.container integration
 		echo 'Integration tests complete, press ENTER to close'
 		touch $integ_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:integration suite
 
     # Wait for deb build to complete by monitoring the deb file
     echo "Waiting for deb build to complete..."
@@ -109,23 +120,31 @@ function test_full() {
     echo "Starting test suites..."
 
     # Run tests in separate Ghostty terminals
-    flatpak run app.devsuite.Ptyxis -d $test_dir --title="level1 suite" -- bash -c "
+    kitty -d $test_dir --title="level1 suite" -- bash -c "
 		make -f makefile.container level1 DCSERVER=10.8.3.191
 		echo 'level1 tests complete, press ENTER to close'
 		touch $lvl1_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:level1 suite
+
 	while [[ ! -f "$lvl1_sig_file" ]]; do
 		echo "Waiting for integration tests to complete..."
 		sleep 5
 	done
 
-    flatpak run app.devsuite.Ptyxis -d $test_dir --title="api suite" -- bash -c "
+    kitty -d $test_dir --title="api suite" -- bash -c "
 		make -f makefile.container api DCSERVER=10.8.3.52
 		echo 'api tests complete, press ENTER to close'
 		touch $api_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:api suite
+
 	while [[ ! -f "$api_sig_file" || ! -f "$integ_sig_file" ]]; do
 		echo "Waiting for final tests to complete"
 		sleep 5
@@ -139,11 +158,14 @@ function test_unit() {
 	build_cmdr_venv
 
     # Open Ghostty terminals and run the make commands
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -e bash -c "
+    kitty -d $cmdr_dir --title="unit suite" -e bash -c "
 		make -f makefile.container unit
 		echo 'Unit tests complete, press ENTER to close'
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:unit suite
 }
 
 function test_local() {
@@ -153,23 +175,31 @@ function test_local() {
 	build_cmdr_venv
 
     # Open Ghostty terminals and run the make commands
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="unit suite" -- bash -c "
+    kitty -d $cmdr_dir --title="unit suite" -- bash -c "
 	make -f makefile.container unit
 	echo 'Unit tests complete, press ENTER to close'
 	touch $unit_sig_file
 	read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:unit suite
+
 	while [[ ! -f "$unit_sig_file" ]]; do
 		echo "Waiting for unit tests to complete..."
 		sleep 5
 	done
 
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="integration suite" -- bash -c "
+    kitty -d $cmdr_dir --title="integration suite" -- bash -c "
 	make -f makefile.container integration
 	echo 'Integration tests complete, press ENTER to close'
 	touch $integ_sig_file
 	read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:integration suite
+
 	while [[ ! -f "$integ_sig_file" ]]; do
 		echo "Waiting for integration tests to complete..."
 		sleep 5
@@ -188,23 +218,31 @@ function test_system() {
     echo "Starting test suites..."
 
     # Run tests in separate Ghostty terminals
-    flatpak run app.devsuite.Ptyxis -d $test_dir --title="level1 suite" -- bash -c "
+    kitty -d $test_dir --title="level1 suite" -- bash -c "
 		make -f makefile.container level1 DCSERVER=10.8.3.191
 		echo 'level1 tests complete, press ENTER to close'
 		touch $lvl1_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:level1 suite
+
 	while [[ ! -f "$lvl1_sig_file" ]]; do
 		echo "Waiting for integration tests to complete..."
 		sleep 5
 	done
 
-    flatpak run app.devsuite.Ptyxis -d $test_dir --title="api suite" -- bash -c "
+    kitty -d $test_dir --title="api suite" -- bash -c "
 		make -f makefile.container api DCSERVER=10.8.3.52
 		echo 'api tests complete, press ENTER to close'
 		touch $api_sig_file
 		read line
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:api suite
+
 	while [[ ! -f "$api_sig_file" ]]; do
 		echo "Waiting for integration tests to complete..."
 		sleep 5
@@ -219,9 +257,12 @@ function patch_systems() {
 	# Remove existing builds before building
 	rm -rf $build_dir
     # Run the deb build in a new terminal and wait for it to complete
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="deb build" -- bash -c "
+    kitty -d $cmdr_dir --title="deb build" -- bash -c "
 		make -f makefile.container deb
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:deb build
 
     # Wait for deb build to complete by monitoring the deb file
     echo "Waiting for deb build to complete..."
@@ -273,9 +314,14 @@ function build_venv() {
 
 	add_venv
 
-    flatpak run app.devsuite.Ptyxis -d $1 --title="Venv Build" -- bash -c "
+	sleep 1
+
+    kitty -d $1 --title="Venv Build" -- bash -c "
 		make -f makefile.container venv
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:Venv Build
 
 	echo "Waiting for venv build to complete..."
     while [[ ! -f "$2" ]]; do
@@ -292,13 +338,19 @@ function build_all_venv() {
 
 	add_venv
 
-    flatpak run app.devsuite.Ptyxis -d $cmdr_dir --title="Venv Build" -- bash -c "
+    kitty -d $cmdr_dir --title="Venv Build1" -- bash -c "
 		make -f makefile.container venv
 	" &
 
-    flatpak run app.devsuite.Ptyxis -d $test_dir --title="Venv Build" -- bash -c "
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:Venv Build1
+
+    kitty -d $test_dir --title="Venv Build2" -- bash -c "
 		make -f makefile.container venv
 	" &
+
+	sleep 0.2
+	hyprctl dispatch movetoworkspacesilent $current_workspace,title:Venv Build2
 
 	echo "Waiting for venv builds to complete..."
     while [[ ! -f "$cmdr_venv_done" || ! -f "$sys_venv_done" ]]; do
