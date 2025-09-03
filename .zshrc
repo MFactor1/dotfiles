@@ -392,10 +392,10 @@ up() {
 }
 
 purge_repo_cache() {
-	original_path="$(pwd)"
-	cd "$(git rev-parse --show-toplevel)"
-	git clean -dfx
-	cd "$original_path"
+    original_path="$(pwd)"
+    cd "$(git rev-parse --show-toplevel)"
+    git clean -dfx -e "**/.env*"
+    cd "$original_path"
 }
 
 irebase() {
