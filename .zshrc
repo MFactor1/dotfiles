@@ -18,6 +18,8 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+autoload -Uz compinit && compinit
+
 up() {
 	declare -i d=${@:-1}
 	(( $d < 0 )) && (>&2 echo "up: Error: negative value provided") && return 1;
