@@ -20,6 +20,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+autoload -Uz compinit && compinit
+
 # Add ssh keys (not automatic for whatever reason)
 ssh-add ~/.ssh/id_ed25519 >/dev/null 2&>1
 ssh-add ~/.ssh/azure-dc-dev-test.pem >/dev/null 2&>1
