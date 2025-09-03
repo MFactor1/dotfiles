@@ -43,7 +43,6 @@ current_workspace=$(hyprctl activeworkspace -j | jq -r '.id')
 
 function test_full() {
 	rm_sig_files
-	add_api_key
 	docker-kill
 	build_all_venv
 
@@ -152,7 +151,6 @@ function test_full() {
 		sleep 5
 	done
 
-	rm_api_key
 }
 
 function test_unit() {
@@ -172,7 +170,6 @@ function test_unit() {
 
 function test_local() {
 	rm_sig_files
-	add_api_key
 	docker-kill
 	build_cmdr_venv
 
@@ -207,12 +204,10 @@ function test_local() {
 		sleep 5
 	done
 
-	rm_api_key
 }
 
 function test_system() {
 	rm_sig_files
-	add_api_key
 	build_test_venv
 
 	patch_systems
@@ -250,7 +245,6 @@ function test_system() {
 		sleep 5
 	done
 
-	rm_api_key
 }
 
 function patch_systems() {
@@ -385,16 +379,6 @@ function rm_venv() {
 	if grep "^INNER_TARGETS" "$test_make" | grep -q "venv"; then
 		sed -i 's/^\(INNER_TARGETS.*\) venv$/\1/' "$test_make"
 	fi
-}
-
-function add_api_key() {
-	local new_key=$(cat $HOME/env/.dcs_env)
-
-	sed -i "s/client_secret=\"\(.*\)\",/client_secret=\"$new_key\",#\1/" "$fixtures"
-}
-
-function rm_api_key() {
-	sed -i "s/client_secret=\".*\",#\(.*\)$/client_secret=\"\1\",/" "$fixtures"
 }
 
 function rm_sig_files() {
