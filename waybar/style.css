@@ -105,6 +105,23 @@ window#waybar {
 	margin: 7px 3px 0px 7px;
 }
 
+#bluetooth {
+	background-color: @surface0;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: 7px 3px 2px 7px;
+	color: @text;
+}
+
+#bluetooth.connected,
+#bluetooth.on {
+	color: @green;
+}
+
+#bluetooth.off {
+	color: @red;
+}
+
 #clock {
   background-color: @surface0;
   color: @text;
