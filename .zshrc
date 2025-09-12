@@ -3,7 +3,11 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
+
+autoload -Uz compinit && compinit
+
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 USER=`whoami`
 
@@ -43,4 +47,5 @@ alias scp='scp -r'
 alias ls='eza --all'
 alias tree='eza --tree --all --git-ignore'
 alias ll='eza --all --long --total-size'
+alias cd='z'
 alias tokei='tokei --sort code'
