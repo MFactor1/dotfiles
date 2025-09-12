@@ -3,7 +3,11 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
+
+autoload -Uz compinit && compinit
+
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 USER=`whoami`
 
@@ -19,8 +23,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-autoload -Uz compinit && compinit
 
 # Add ssh keys (not automatic for whatever reason)
 ssh-add ~/.ssh/id_ed25519 >/dev/null 2>&1
@@ -437,6 +439,7 @@ alias patch-systems='patch_systems'
 alias ls='eza --all'
 alias tree='eza --tree --all'
 alias ll='eza --all --long --total-size'
+alias cd='z'
 alias cargo='cargo-1.82'
 alias tokei='tokei --sort code'
 alias futurize-imports="python3 $HOME/pyscripts/futurize_imports.py"
