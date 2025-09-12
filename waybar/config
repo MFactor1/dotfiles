@@ -33,6 +33,7 @@
 		},
 		"modules": [
 			"custom/poweroff",
+			"custom/logout",
 			"custom/lock",
 			"custom/suspend",
 			"custom/reboot",
@@ -58,6 +59,11 @@
         "on-click": "loginctl lock-session",
 		"tooltip-format": "Lock Session",
     },
+	"custom/logout": {
+		"format": "󱅞",
+		"on-click": "hyprctl dispatch exit",
+		"tooltip-format": "Logout",
+ 	},
 
 	"custom/media": {
 		"exec": "$HOME/.config/waybar/mediaplayer.py --player spotify",

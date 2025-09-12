@@ -78,26 +78,29 @@ window#waybar {
   padding: 8px 5px;
 }
 
+#custom-logout,
 #custom-lock,
 #custom-reboot,
 #custom-poweroff,
 #custom-suspend {
 	background: transparent;
-	min-width: 35px;
-}
-#custom-lock {
+	padding-left: 15px;
+	padding-right: 18px;
 	margin: 0px;
-}
-#custom-reboot {
-	margin: 0px;
-}
-#custom-suspend {
-	margin: 0px;
+	color: @text;
 }
 
-#custom-poweroff {
-	padding-right: 8px;
-	margin: 0px;
+#custom-reboot {
+	padding-right: 16px;
+}
+
+#custom-suspend,
+#custom-logout {
+	padding-right: 17px;
+}
+
+#custom-lock {
+	padding-right: 21px;
 }
 
 #powermenu {
