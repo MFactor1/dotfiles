@@ -82,6 +82,7 @@ window#waybar {
 	padding: 8px 5px;
 }
 
+#custom-logout,
 #custom-lock,
 #custom-reboot,
 #custom-poweroff,
@@ -89,21 +90,21 @@ window#waybar {
 	background: transparent;
 	padding-left: 15px;
 	padding-right: 18px;
-	margin: 7px 3px 2px 7px;
+	margin: 0px;
 	color: @text;
 }
-#custom-lock {
-	margin: 0px;
-}
+
 #custom-reboot {
-	margin: 0px;
-}
-#custom-suspend {
-	margin: 0px;
+	padding-right: 16px;
 }
 
-#custom-poweroff {
-	margin: 0px;
+#custom-suspend,
+#custom-logout {
+	padding-right: 17px;
+}
+
+#custom-lock {
+	padding-right: 21px;
 }
 
 #powermenu {
