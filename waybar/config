@@ -19,10 +19,11 @@
     "modules-right": [
 		"battery",
 		"pulseaudio",
+		"bluetooth",
 		"network",
 		"clock",
-		"group/powermenu",
 		"tray",
+		"group/powermenu",
     ],
 	"group/powermenu": {
 		"orientation": "inherit",
@@ -32,6 +33,7 @@
 		},
 		"modules": [
 			"custom/poweroff",
+			"custom/logout",
 			"custom/lock",
 			"custom/suspend",
 			"custom/reboot",
@@ -57,6 +59,11 @@
         "on-click": "loginctl lock-session",
 		"tooltip-format": "Lock Session",
     },
+	"custom/logout": {
+		"format": "󱅞",
+		"on-click": "hyprctl dispatch exit",
+		"tooltip-format": "Logout",
+ 	},
 
 	"custom/media": {
 		"exec": "$HOME/.config/waybar/mediaplayer.py --player spotify",
@@ -69,19 +76,9 @@
     "hyprland/workspaces": {
 	   "format": "{icon}",
 	   "format-icons": {
-	      "1": " ",
-	      "2": " ",
-	      "3": " ",
-	      "4": " ",
-	      "5": " ",
-	      "6": " ",
 	      "active": "", //"", //"", // 
 	      "default": " "
 	   },
-       "persistent-workspaces": {
-             "DP-1": 6,
-			 "DP-2": 1,
-       }
 	},
     "keyboard-state": {
         "numlock": true,
@@ -174,13 +171,11 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+		//"format-charging": "{capacity}% 󰂄",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        //"format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰂃", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -197,7 +192,7 @@
       }
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlp0s20f3", // (Optional) To force the use of this interface
         "format-wifi": " {icon}  {essid}",
 		"format-icons": {
         "wifi": [
@@ -208,7 +203,7 @@
             "󰤨"  // 80-100% (nf-md-wifi_strength_4)
 			]
 		},
-        "format-ethernet": "{ipaddr}/{cidr}",
+        //"format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format": "{ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
@@ -218,20 +213,31 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
+        "format-bluetooth-muted": "{volume}% 󰓄  {format_source}",
+        "format-muted": "{volume}% 󰓄  {format_source}",
         "format-source": "{volume}%  ",
-        "format-source-muted": " ",
+        "format-source-muted": "  ",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
             "default": ["󰓄 ", "󰓃 ", "󰓃 "]
         },
         "on-click": "ghostty -e ~/.cargo/bin/wiremix"
+    },
+	"bluetooth": {
+        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+        // "format": "󰂯 {status}",
+        // format-* handles every state, so default format is not necessary.
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲", // an empty format will hide the module
+        "format-connected": "󰂱  {num_connections}",
+        // "tooltip-format": "{controller_alias}\t{controller_address}",
+        // "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
     },
 }

@@ -14,15 +14,6 @@ window#waybar {
   background: transparent;
 }
 
-
-#custom-lock {
-	margin: 7px 3px 2px 7px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: @surface0;
-	color: @text;
-}
-
 .custom-spotify {
   padding: 4px 10px;
   margin: 7px 3px 2px 7px;
@@ -41,12 +32,16 @@ window#waybar {
 }
 
 #workspaces button {
-  color: @surface1;
-  padding-left: 3px;
-  margin: 1px 2px;
-  box-shadow: none;
-  border: 0px;
-  transition: all 0.9s cubic-bezier(.05,0.9,.1,1);
+	color: @surface1;
+	padding-left: 3px;
+	margin: 1px 2px;
+	box-shadow: none;
+	text-shadow: none;
+	background: none;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	transition: all 0.9s cubic-bezier(.05,0.9,.1,1);
 }
 
 #workspaces button.active {
@@ -57,10 +52,19 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background-color: alpha(@surface0, 0);
-  border-color: alpha(@surface0, 0);
-  border: 0px;
-  color: #524f67;
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	color: @highlight1;
+}
+
+#workspaces button.active:hover {
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+	color: @iris;
 }
 
 #network,
@@ -73,36 +77,56 @@ window#waybar {
 #custom-poweroff,
 #custom-reboot,
 #custom-suspend {
-  background-color: @surface0;
-  margin: 7px 3px 0px 7px;
-  padding: 8px 5px;
+	background-color: @surface0;
+	margin: 7px 3px 0px 7px;
+	padding: 8px 5px;
 }
 
+#custom-logout,
 #custom-lock,
 #custom-reboot,
 #custom-poweroff,
 #custom-suspend {
 	background: transparent;
-	min-width: 35px;
-}
-#custom-lock {
+	padding-left: 15px;
+	padding-right: 18px;
 	margin: 0px;
-}
-#custom-reboot {
-	margin: 0px;
-}
-#custom-suspend {
-	margin: 0px;
+	color: @text;
 }
 
-#custom-poweroff {
-	padding-right: 8px;
-	margin: 0px;
+#custom-reboot {
+	padding-right: 16px;
+}
+
+#custom-suspend,
+#custom-logout {
+	padding-right: 17px;
+}
+
+#custom-lock {
+	padding-right: 21px;
 }
 
 #powermenu {
 	background-color: @surface0;
-	margin: 7px 3px 0px 7px;
+	margin: 7px 13px 0px 7px;
+}
+
+#bluetooth {
+	background-color: @surface0;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: 7px 3px 2px 7px;
+	color: @text;
+}
+
+#bluetooth.connected,
+#bluetooth.on {
+	color: @green;
+}
+
+#bluetooth.off {
+	color: @red;
 }
 
 #clock {
@@ -115,6 +139,8 @@ window#waybar {
 
 #battery {
   color: @green;
+  padding-right: 12px;
+  padding-left: 10px;
 }
 
 #battery.charging {
@@ -129,7 +155,7 @@ window#waybar {
   background-color: @surface0;
   color: @text;
   padding-right: 17px;
-  padding-left: 10px;
+  padding-left: 7px;
 /*  background: linear-gradient(@iris,@mauve); */
   color: @text;
 }
@@ -141,7 +167,7 @@ window#waybar {
 #pulseaudio {
   background-color: @surface0;
   color: @text;
-  padding-right: 10px;
+  padding-right: 6px;
   padding-left: 10px;
 /*  background: linear-gradient(@iris,@mauve); */
 }
@@ -158,7 +184,7 @@ window#waybar {
 
 #tray {
 	background-color: @surface0;
-	margin: 7px 13px 0px 7px;
+	margin: 7px 3px 0px 7px;
 	padding-right: 13px;
 	padding-left: 13px;
 }

@@ -3,7 +3,11 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
+
+autoload -Uz compinit && compinit
+
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 USER=`whoami`
 
@@ -17,6 +21,8 @@ export PATH=$PATH:/home/$USER/.local/bin
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+autoload -Uz compinit && compinit
 
 up() {
 	declare -i d=${@:-1}
@@ -41,4 +47,6 @@ alias scp='scp -r'
 alias ls='eza --all'
 alias tree='eza --tree --all --git-ignore'
 alias ll='eza --all --long --total-size'
+alias cd='z'
+alias grep='rg --no-ignore --hidden'
 alias tokei='tokei --sort code'
