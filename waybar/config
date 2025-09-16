@@ -19,7 +19,7 @@
     "modules-right": [
 		"battery",
 		"pulseaudio",
-		"bluetooth",
+		//"bluetooth",
 		"network",
 		"clock",
 		"tray",
@@ -192,7 +192,7 @@
       }
     },
     "network": {
-        "interface": "wlp0s20f3", // (Optional) To force the use of this interface
+        "interface": "wlp38s0", // (Optional) To force the use of this interface
         "format-wifi": " {icon}  {essid}",
 		"format-icons": {
         "wifi": [
