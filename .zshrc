@@ -396,7 +396,7 @@ up() {
 purge_repo_cache() {
     original_path="$(pwd)"
     cd "$(git rev-parse --show-toplevel)"
-    git clean -dfx -e "**/.env*" -e "pyrightconfig.json"
+    git clean -dfx -e "**/.env*" -e "pyrightconfig.json" -e "makefile.local"
     cd "$original_path"
 }
 
