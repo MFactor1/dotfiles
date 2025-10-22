@@ -47,8 +47,11 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes:2'
 
 -- formatting opts
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.autoindent = true
 
 -- Set filetypes as typescriptreact for .tsx and .jsx files
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
