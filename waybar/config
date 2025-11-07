@@ -145,11 +145,11 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false,
-		"on-click": "ghostty -e htop"
+		"on-click": "ghostty -e btop"
     },
     "memory": {
         "format": "{}% ",
-		"on-click": "ghostty -e htop"
+		"on-click": "ghostty -e btop"
     },
     "temperature": {
         // "thermal-zone": 2,
