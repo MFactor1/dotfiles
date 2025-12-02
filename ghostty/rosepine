@@ -1,2 +1,3 @@
 theme = Rose Pine
 confirm-close-surface = false
+shell-integration-features = ssh-terminfo
