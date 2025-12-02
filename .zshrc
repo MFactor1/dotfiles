@@ -441,6 +441,5 @@ alias tree='eza --tree --all'
 alias ll='eza --all --long --total-size'
 alias cd='z'
 alias grep='rg --no-ignore --hidden'
-alias cargo='cargo-1.82'
 alias tokei='tokei --sort code'
 alias futurize-imports="python3 $HOME/pyscripts/futurize_imports.py"
