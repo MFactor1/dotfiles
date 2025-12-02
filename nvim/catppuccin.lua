@@ -27,6 +27,7 @@ require("catppuccin").setup({
 	},
 	]]--
 	integrations = {
+        nvimtree = true,
 		coc_nvim = true,
 		telescope = {
 			enabled = true,

@@ -15,6 +15,8 @@ Plug('lewis6991/gitsigns.nvim')
 Plug('lervag/vimtex')
 Plug('leafgarland/typescript-vim')
 Plug('peitalin/vim-jsx-typescript')
+Plug('Vimjas/vim-python-pep8-indent')
+Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
 
 vim.call('plug#end')
 
@@ -117,7 +119,29 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'python' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
 local keyset = vim.keymap.set
+
+-- install treesitter parsers
+require('nvim-treesitter').install{
+    'python',
+    'yaml',
+    'hyprlang',
+    'javascript',
+    'go',
+    'latex',
+    'lua',
+    'toml',
+    'zsh',
+}
 
 -- sidebar git change indicators
 require('gitsigns').setup({
