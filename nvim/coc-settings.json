@@ -1,5 +1,5 @@
 {
-	"semanticTokens.enable": true,
+	"semanticTokens.enable": false,
 	"colors.enable": true,
 	"zig.enabled": true,
 	"zig.startUpMessage": true,

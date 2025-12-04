@@ -6,7 +6,7 @@ vim.call('plug#begin')
 Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
+Plug('nvim-telescope/telescope.nvim', { ['branch'] = 'master' })
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('MunifTanjim/nui.nvim')
 Plug('Bekaboo/dropbar.nvim')
@@ -19,9 +19,6 @@ Plug('Vimjas/vim-python-pep8-indent')
 Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
 
 vim.call('plug#end')
-
--- import the selected theme selection (this can change based on setup options)
-require('selected-theme')
 
 vim.g.mapleader = " "
 vim.g.vimtex_mappings_prefix = "\\"
@@ -215,3 +212,5 @@ vim.cmd('match EoLSpace /\\s\\+$/')
 --vim.cmd('highlight EoFNewline ctermbg=244 guibg=#5e3f53')
 --vim.cmd('match EoFNewline /^\\n\\%$/')
 
+-- import the selected theme selection (this can change based on setup options)
+require('selected-theme')
