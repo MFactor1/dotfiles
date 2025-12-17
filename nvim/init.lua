@@ -6,7 +6,7 @@ vim.call('plug#begin')
 Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
+Plug('nvim-telescope/telescope.nvim', {['branch'] = 'master' })
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('MunifTanjim/nui.nvim')
 Plug('Bekaboo/dropbar.nvim')
@@ -153,6 +153,8 @@ require('gitsigns').setup({
 -- vertical tabspace lines
 require("ibl").setup()
 
+-- breaks telescope
+--[[
 require("dropbar").setup({
 	bar = {
 		enable = true,
@@ -180,6 +182,7 @@ require("dropbar").setup({
 		end,
 	}
 })
+--]]
 
 -- autocomplete
 function _G.check_back_space()
