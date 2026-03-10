@@ -1,18 +1,18 @@
-@define-color text     #e0def4;
-@define-color subtext0 #a6adc8;
-@define-color subtext1 #bac2de;
+@define-color text     alpha(#e0def4, 1);
+@define-color subtext0 alpha(#a6adc8, 1);
+@define-color subtext1 alpha(#bac2de, 1);
 
-@define-color surface0 #191724;
-@define-color surface1 #1f1d2e;
-@define-color surface2 #26233a;
+@define-color surface0 alpha(#191724, 0.7);
+@define-color surface1 alpha(#1f1d2e, 0.7);
+@define-color surface2 alpha(#26233a, 0.7);
 
-@define-color highlight0 #21202e;
-@define-color highlight1 #403d52;
-@define-color highlight2 #524f67;
+@define-color highlight0 alpha(#21202e, 0.7);
+@define-color highlight1 alpha(#403d52, 0.7);
+@define-color highlight2 alpha(#524f67, 0.7);
 
-@define-color foreground0 #6e6a86;
-@define-color foreground1 #908caa;
+@define-color foreground0 alpha(#6e6a86, 0.7);
+@define-color foreground1 alpha(#908caa, 0.7);
 
-@define-color iris #c4a7e7;
-@define-color red #eb6f92;
-@define-color green #a6e3a1;
+@define-color iris alpha(#c4a7e7, 0.7);
+@define-color red alpha(#eb6f92, 0.7);
+@define-color green alpha(#a6e3a1, 0.7);
