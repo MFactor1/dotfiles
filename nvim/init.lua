@@ -127,6 +127,51 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'go' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'yaml' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'hyprlang' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'hyprlang' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
+-- Enable treesitter for python
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'toml' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
+
 local keyset = vim.keymap.set
 
 -- install treesitter parsers
