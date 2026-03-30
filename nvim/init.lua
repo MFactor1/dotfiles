@@ -238,6 +238,13 @@ end
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#confirm() : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
 
+-- Copilot accept keymap
+vim.keymap.set('i', '<D-a>', 'copilot#Accept("")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
 -- highlight symbol under curson
 vim.api.nvim_create_augroup("CocGroup", {})
 vim.api.nvim_create_autocmd("CursorHold", {
