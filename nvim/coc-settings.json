@@ -10,6 +10,16 @@
 			"module": "/usr/local/lib/node_modules/sql-language-server/dist/bin/cli.js",
 			"args": ["up", "--method", "node-ipc"],
 			"filetypes": ["sql", "mysql"]
+		},
+		"rust": {
+			"command": "rust-analyzer",
+			"filetypes": ["rust"],
+			"rootPatterns": ["Cargo.toml"]
 		}
-	}
+	},
+	"workspace.ignoredFolders": [
+		"$HOME",
+		"$HOME/.cargo/**",
+		"$HOME/.rustup/**"
+	]
 }
