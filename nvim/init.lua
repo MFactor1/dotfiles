@@ -38,7 +38,8 @@ vim.g.coc_global_extensions = {
 	'coc-tsserver',
 	'coc-html',
 	'coc-clangd',
-    'coc-go',
+	'coc-go',
+	'coc-rust-analyzer',
 }
 
 -- setup left side columm
