@@ -44,3 +44,4 @@ irebase() {
 }
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
+. "$HOME/.cargo/env"
