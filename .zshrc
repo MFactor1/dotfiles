@@ -17,6 +17,7 @@ export PATH=$PATH:/home/$USER/.spicetify
 export PATH=$PATH:/home/$USER/bin
 export PATH=$PATH:/home/$USER/.cargo/bin
 export PATH=$PATH:/home/$USER/.local/bin
+export PATH=$PATH:/home/$USER/go/bin
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
