@@ -53,6 +53,8 @@ vim.opt.signcolumn = 'yes:2'
 -- formatting opts
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+vim.opt.textwidth = 100
+vim.opt.colorcolumn = "100"
 
 -- Set filetypes as typescriptreact for .tsx and .jsx files
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
