@@ -18,6 +18,9 @@ Plug('peitalin/vim-jsx-typescript')
 Plug('Vimjas/vim-python-pep8-indent')
 Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
 Plug('kdheepak/lazygit.nvim')
+Plug('neovim/nvim-lspconfig')
+Plug('hrsh7th/nvim-cmp')
+Plug('hrsh7th/cmp-nvim-lsp')
 
 vim.call('plug#end')
 
@@ -27,6 +30,33 @@ vim.g.vimtex_view_method = "general"
 vim.opt.updatetime = 300
 vim.opt.swapfile = false
 vim.opt.wrap = false
+
+local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- LSP config for gopls
+vim.lsp.config("gopls", {
+    capabilities = cmp_capabilities,
+    settings = {
+        gopls = {
+            buildFlags = { "-tags=unit,e2e" },
+            completeUnimported = true,
+            usePlaceholders = true,
+        },
+    },
+})
+vim.lsp.enable("gopls")
+
+-- Display LSP diagnostics
+vim.diagnostic.config({
+  -- show error text inline
+  virtual_text = true,
+
+  -- pop-up windows
+  float = {
+    border = "rounded",
+    source = true,
+  },
+})
 
 -- coc auto install extensions
 vim.g.coc_global_extensions = {
@@ -39,7 +69,6 @@ vim.g.coc_global_extensions = {
 	'coc-tsserver',
 	'coc-html',
 	'coc-clangd',
-	'coc-go',
 	'coc-rust-analyzer',
 }
 
@@ -211,7 +240,6 @@ require("dropbar").setup({
 			return {
 			  sources.path,
 			  sources.lsp,
-			  sources.treesitter,
 			  sources.markdown,
 			}
 		  end
@@ -223,12 +251,63 @@ require("dropbar").setup({
 		  return {
 			sources.path,
 			sources.lsp,
-			sources.treesitter,
 		  }
 		end,
 	}
 })
 --]]
+
+local cmp = require('cmp')
+
+-- nvim-cmp setup
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.snippet.expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<Down>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback() -- Moves cursor down normally if menu is closed
+            end
+        end, { "i", "s" }),
+
+        ["<Up>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback() -- Moves cursor up normally if menu is closed
+            end
+        end, { "i", "s" }),
+        -- Scroll documentation window with mouse wheel
+        ["<ScrollWheelUp>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(-1) -- Scrolls up 1 line
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<ScrollWheelDown>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(1) -- Scrolls down 1 line
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+    }, {
+        { name = "buffer" },
+    }),
+})
 
 -- autocomplete
 function _G.check_back_space()
@@ -263,6 +342,9 @@ keyset('n', '<leader>wq', ':wall <CR>:q <CR>') -- save and close all
 
 -- lazygit keybind
 keyset('n', '<leader>lg', ':LazyGit <CR>')
+
+-- lsp keybinds
+keyset('n', '<leader>v', vim.diagnostic.open_float)
 
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')

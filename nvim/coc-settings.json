@@ -17,12 +17,6 @@
 			"rootPatterns": ["Cargo.toml"]
 		}
 	},
-    "go.goplsOptions": {
-        "completeUnimported": true,
-        "matcher": "Fuzzy",
-        "symbolMatcher": "FastFuzzy",
-        "buildFlags": ["-tags=unit,e2e"]
-    },
 	"workspace.ignoredFolders": [
 		"$HOME",
 		"$HOME/.cargo/**",
