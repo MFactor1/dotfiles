@@ -346,6 +346,10 @@ keyset('n', '<leader>lg', ':LazyGit <CR>')
 -- lsp keybinds
 keyset('n', '<leader>v', vim.diagnostic.open_float)
 
+-- coc keybinds
+keyset('n', '<leader>gd', '<Plug>(coc-definition)')
+keyset('n', '<leader>em', ':CocCommand rust-analyzer.expandMacro <CR>')
+
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
 vim.cmd('match EoLSpace /\\s\\+$/')
