@@ -17,6 +17,7 @@ Plug('leafgarland/typescript-vim')
 Plug('peitalin/vim-jsx-typescript')
 Plug('Vimjas/vim-python-pep8-indent')
 Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
+Plug('kdheepak/lazygit.nvim')
 
 vim.call('plug#end')
 
@@ -259,6 +260,9 @@ keyset('n', '<leader>f', ':Telescope find_files <CR>')
 keyset('n', '<leader>g', ':Telescope live_grep <CR>')
 keyset('n', '<leader>c', ':Telescope grep_string <CR>')
 keyset('n', '<leader>wq', ':wall <CR>:q <CR>') -- save and close all
+
+-- lazygit keybind
+keyset('n', '<leader>lg', ':LazyGit <CR>')
 
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
