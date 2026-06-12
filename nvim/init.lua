@@ -16,11 +16,11 @@ Plug('lervag/vimtex')
 Plug('leafgarland/typescript-vim')
 Plug('peitalin/vim-jsx-typescript')
 Plug('Vimjas/vim-python-pep8-indent')
-Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
 Plug('kdheepak/lazygit.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('romus204/tree-sitter-manager.nvim')
 
 vim.call('plug#end')
 
@@ -56,6 +56,20 @@ vim.diagnostic.config({
     border = "rounded",
     source = true,
   },
+})
+
+require('tree-sitter-manager').setup({
+    ensure_installed = {
+        "python",
+        "yaml",
+        "hyprlang",
+        "javascript",
+        "go",
+        "latex",
+        "lua",
+        "toml",
+        "zsh",
+    },
 })
 
 -- coc auto install extensions
@@ -149,74 +163,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'python' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'go' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'yaml' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'hyprlang' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'hyprlang' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
--- Enable treesitter for python
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'toml' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    end,
-})
-
 local keyset = vim.keymap.set
-
--- install treesitter parsers
-require('nvim-treesitter').install{
-    'python',
-    'yaml',
-    'hyprlang',
-    'javascript',
-    'go',
-    'latex',
-    'lua',
-    'toml',
-    'zsh',
-}
 
 -- sidebar git change indicators
 require('gitsigns').setup({
