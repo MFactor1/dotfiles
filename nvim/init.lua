@@ -69,6 +69,7 @@ require('tree-sitter-manager').setup({
         "lua",
         "toml",
         "zsh",
+        "cpp",
     },
 })
 
