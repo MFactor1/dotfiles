@@ -50,6 +50,20 @@ vim.lsp.config("gopls", {
 })
 vim.lsp.enable("gopls")
 
+-- LSP config for ty
+vim.lsp.config("ty", {
+    capabilities = capabilities,
+    settings = {
+        ty = {
+            inlayHints = {
+                variableTypes = true,
+                callArgumentNames = true,
+            },
+        },
+    },
+})
+vim.lsp.enable("ty")
+
 -- Display LSP diagnostics
 vim.diagnostic.config({
   -- show error text inline
@@ -81,7 +95,6 @@ require('tree-sitter-manager').setup({
 vim.g.coc_global_extensions = {
 	'coc-json',
 	'coc-sh',
-	'coc-pyright',
 	'coc-zig',
 	'coc-cmake',
 	'coc-java',
