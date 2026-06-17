@@ -54,6 +54,11 @@ require("catppuccin").setup({
 		telescope = {
 			enabled = true,
 		},
+        gitsigns = true,
+        indent_blankline = {
+            enabled = true
+        },
+        cmp = true,
 	},
 })
 
