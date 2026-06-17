@@ -31,11 +31,15 @@ vim.opt.updatetime = 300
 vim.opt.swapfile = false
 vim.opt.wrap = false
 
-local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- nvim LSP setup
+vim.lsp.inlay_hint.enable(true)
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.inlayHint = {}
 
 -- LSP config for gopls
 vim.lsp.config("gopls", {
-    capabilities = cmp_capabilities,
+    capabilities = capabilities,
     settings = {
         gopls = {
             buildFlags = { "-tags=unit,e2e" },

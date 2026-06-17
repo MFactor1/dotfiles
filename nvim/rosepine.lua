@@ -29,6 +29,7 @@ require("catppuccin").setup({
             Type = { fg = colors.yellow },
             Keyword = { fg = colors.mauve },
             Boolean = { fg = colors.mauve },
+            LspInlayHint = { fg = colors.overlay0, bg = colors.base, style = { "italic" } },
             ["@punctuation.bracket"] = { fg = colors.text }, -- () [] {}
             ["@punctuation.delimiter"] = { fg = colors.text }, -- , ; :
             ["@punctuation.special"] = { fg = colors.text },
