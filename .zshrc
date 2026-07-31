@@ -445,3 +445,4 @@ alias cd='z'
 alias grep='rg --no-ignore --hidden'
 alias tokei='tokei --sort code'
 alias futurize-imports="python3 $HOME/pyscripts/futurize_imports.py"
+alias clear-dns='sudo systemctl restart systemd-resolved && sudo resolvectl flush-caches'
