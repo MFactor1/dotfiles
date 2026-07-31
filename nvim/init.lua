@@ -32,7 +32,13 @@ vim.opt.swapfile = false
 vim.opt.wrap = false
 
 -- nvim LSP setup
-vim.lsp.inlay_hint.enable(true)
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+        -- Inlay hints display inferred types, etc.
+        vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+    end,
+})
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.inlayHint = {}
@@ -63,6 +69,12 @@ vim.lsp.config("ty", {
     },
 })
 vim.lsp.enable("ty")
+
+-- LSP config for rust-analyzer
+vim.lsp.config("rust_analyzer", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("rust_analyzer")
 
 -- Display LSP diagnostics
 vim.diagnostic.config({
@@ -101,7 +113,6 @@ vim.g.coc_global_extensions = {
 	'coc-tsserver',
 	'coc-html',
 	'coc-clangd',
-	'coc-rust-analyzer',
 }
 
 -- setup left side columm
