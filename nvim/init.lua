@@ -245,7 +245,7 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<tab>"] = cmp.mapping.confirm({ select = true }),
         ["<Down>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
