@@ -54,7 +54,6 @@ vim.opt.signcolumn = 'yes:2'
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.textwidth = 100
-vim.opt.colorcolumn = "100"
 
 -- Set filetypes as typescriptreact for .tsx and .jsx files
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -131,7 +130,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
-local keyset = vim.keymap.set
 
 -- install treesitter parsers
 require('nvim-treesitter').install{
@@ -192,6 +190,8 @@ function _G.check_back_space()
     local col = vim.fn.col('.') - 1
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
+
+local keyset = vim.keymap.set
 
 -- autocomplete keymap
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
