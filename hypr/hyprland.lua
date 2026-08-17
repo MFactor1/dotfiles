@@ -20,14 +20,6 @@ hl.monitor({
     scale    = 1,
 })
 
--- At-home display
-hl.monitor({
-    output   = "HDMI-A-1",
-    mode     = "3440x1440@80",
-    position = "-3440x0",
-    scale    = 1,
-})
-
 -- Office TV
 hl.monitor({
     output   = "HDMI-A-1",
@@ -36,6 +28,15 @@ hl.monitor({
     scale    = 1,
     mirror = "eDP-1",
 })
+
+-- At-home display
+hl.monitor({
+    output   = "desc:Dell Inc. AW3426DW WWWWWW8",
+    mode     = "3440x1440@80",
+    position = "-3440x0",
+    scale    = 1,
+})
+
 
 local function is_monitor_active(name)
     for _, m in ipairs(hl.get_monitors()) do
@@ -325,6 +326,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user enable --now hypridle.service")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
+    hl.exec_cmd("hyprctl reload")
+    hl.exec_cmd("hyprctl dispatch 'hl.dsp.focus({ workspace = 1 })'")
     hl.exec_cmd("firefox")
     hl.exec_cmd("ghostty")
     hl.exec_cmd("tuned-adm profile hpc-compute")

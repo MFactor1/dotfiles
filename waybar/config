@@ -61,7 +61,7 @@
     },
 	"custom/logout": {
 		"format": "󱅞",
-		"on-click": "hyprctl dispatch exit",
+		"on-click": "hyprctl dispatch 'hl.dsp.exit()'",
 		"tooltip-format": "Logout",
  	},
 
