@@ -17,8 +17,9 @@ while true; do
 	| while read -r img; do
 		awww img \
 			--resize crop \
-			--transition-type fade \
-			--transition-fps 30 \
+			--transition-type any \
+			--transition-fps 60 \
+            --transition-step 2
             --transition-duration 3 \
 			"$img"
 		sleep "${2:-$DEFAULT_INTERVAL}"

@@ -319,9 +319,8 @@ hl.window_rule({
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("hyprctl dispatch 'hl.dsp.focus({ workspace = 1 })'")
     hl.exec_cmd("awww-daemon")
-    hl.exec_cmd("sleep 5 && ~/.config/hypr/awww_gradient_loop.sh ~/Pictures/wallpapers/gradient 3600")
+    hl.exec_cmd("sleep 5 && ~/.config/hypr/awww_gradient_loop.sh ~/Pictures/wallpapers/gradient 60")
     hl.exec_cmd("waybar")
     hl.exec_cmd("systemctl --user enable --now hypridle.service")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
