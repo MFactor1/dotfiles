@@ -192,7 +192,7 @@
       }
     },
     "network": {
-        "interface": "wlp38s0", // (Optional) To force the use of this interface
+        //"interface": "wlp38s0", // (Optional) To force the use of this interface
         "format-wifi": " {icon}  {essid}",
 		"format-icons": {
         "wifi": [
