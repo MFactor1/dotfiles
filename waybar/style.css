@@ -67,6 +67,7 @@ window#waybar {
 	color: @iris;
 }
 
+#idle_inhibitor,
 #network,
 #backlight,
 #clock,
@@ -160,6 +161,15 @@ window#waybar {
   color: @text;
 }
 
+#idle_inhibitor {
+  background-color: @surface0;
+  color: @text;
+  padding-right: 18px;
+  padding-left: 15px;
+/*  background: linear-gradient(@iris,@mauve); */
+  color: @text;
+}
+
 #backlight {
   color: @yellow;
 }
@@ -200,20 +210,13 @@ tooltip label {
 	padding-left: 9px;
 }
 
+#cpu,
+#custom-brightness,
 #memory {
   padding-right: 15px;
   padding-left: 10px;
-  margin: 7px 3px 2px 7px;
+  margin: 7px 3px 0px 7px;
   background-color: @surface0;
 /*  background: linear-gradient(@pink,@iris); */
   color: @text;
-}
-
-#cpu {
-padding-right: 15px;
-padding-left: 10px;
-margin: 7px 3px 2px 13px;
-background-color: @surface0;
-/* background: linear-gradient(@pink,@iris); */
-color: @text;
 }

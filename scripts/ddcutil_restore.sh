@@ -2,6 +2,7 @@
 set -euo pipefail
 
 STATE_DIR="/tmp/ddcutil_state"
+DIMMED_FILE="/tmp/ddcutil_dimmed"
 
 DISPLAYS=$(ddcutil detect | grep "Display [0-9]" | awk '{print $2}')
 
@@ -13,3 +14,4 @@ for D in $DISPLAYS; do
     fi
 done
 
+rm -f $DIMMED_FILE

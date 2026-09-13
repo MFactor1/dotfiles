@@ -17,54 +17,55 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
+		//"custom/brightness",
 		"battery",
 		"pulseaudio",
 		//"bluetooth",
 		"network",
 		"clock",
+		"idle_inhibitor",
 		"tray",
-		"group/powermenu",
+		"group/powermenu"
     ],
 	"group/powermenu": {
 		"orientation": "inherit",
 		"drawer": {
 			"transition-duration": 500,
-			"transition-left-to-right": false,
+			"transition-left-to-right": false
 		},
 		"modules": [
 			"custom/poweroff",
 			"custom/logout",
 			"custom/lock",
 			"custom/suspend",
-			"custom/reboot",
+			"custom/reboot"
 		]
 	},
     "custom/poweroff": {
         "format": "",
         "on-click": "systemctl poweroff",
-		"tooltip-format": "Poweroff",
+		"tooltip-format": "Poweroff"
     },
     "custom/reboot": {
         "format": "",
         "on-click": "systemctl reboot",
-		"tooltip-format": "Reboot",
+		"tooltip-format": "Reboot"
     },
     "custom/suspend": {
         "format": "󰤄",
         "on-click": "systemctl suspend",
-		"tooltip-format": "Suspend",
+		"tooltip-format": "Suspend"
     },
     "custom/lock": {
         "format": "",
         "on-click": "loginctl lock-session",
-		"tooltip-format": "Lock Session",
+		"tooltip-format": "Lock Session"
     },
 	"custom/logout": {
 		"format": "󱅞",
 		"on-click": "hyprctl dispatch 'hl.dsp.exit()'",
-		"tooltip-format": "Logout",
- 	},
-
+		"tooltip-format": "Logout"
+	},
 	"custom/media": {
 		"exec": "$HOME/.config/waybar/mediaplayer.py --player spotify",
 		"format": "{}",
@@ -72,13 +73,17 @@
 		"markup": "none",
 		"on-click": "playerctl --player spotify play-pause"
 	},
-
+	"custom/brightness": {
+		"format": "{text}% 󰃟",
+		"exec": "ddcutil getvcp 10 | grep -oP 'current value =\\s+\\K\\d+'",
+		"interval": 10,
+	},
     "hyprland/workspaces": {
 	   "format": "{icon}",
 	   "format-icons": {
 	      "active": "", //"", //"", // 
 	      "default": " "
-	   },
+	   }
 	},
     "keyboard-state": {
         "numlock": true,
@@ -128,9 +133,10 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+            "activated": "󰅶",
+            "deactivated": "󰾪"
+        },
+		"on-click": "~/.config/scripts/ddcutil_toggle.sh"
     },
     "tray": {
         //"icon-size": 21,
@@ -175,7 +181,7 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         //"format-icons": ["", "", "", "", ""]
-        "format-icons": ["󰂃", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-icons": ["󰂃", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -208,7 +214,7 @@
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"on-click": "~/.config/scripts/network_selector.sh",
+		"on-click": "~/.config/scripts/network_selector.sh"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -239,6 +245,6 @@
         // "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-connected": "{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-		"on-click": "~/.config/scripts/bluetooth_selector.sh",
-    },
+		"on-click": "~/.config/scripts/bluetooth_selector.sh"
+    }
 }
