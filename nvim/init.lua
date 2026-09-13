@@ -16,7 +16,10 @@ Plug('lervag/vimtex')
 Plug('leafgarland/typescript-vim')
 Plug('peitalin/vim-jsx-typescript')
 Plug('Vimjas/vim-python-pep8-indent')
-Plug('nvim-treesitter/nvim-treesitter', { ['branch'] = 'main' })
+Plug('neovim/nvim-lspconfig')
+Plug('hrsh7th/nvim-cmp')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('romus204/tree-sitter-manager.nvim')
 
 vim.call('plug#end')
 
@@ -30,19 +33,61 @@ vim.opt.updatetime = 300
 vim.opt.swapfile = false
 vim.opt.wrap = false
 
+-- nvim LSP setup
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+        -- Inlay hints display inferred types, etc.
+        vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+    end,
+})
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.inlayHint = {}
+
+-- LSP config for gopls
+vim.lsp.config("gopls", {
+    capabilities = capabilities,
+    settings = {
+        gopls = {
+            buildFlags = { "-tags=unit,e2e" },
+            completeUnimported = true,
+            usePlaceholders = true,
+        },
+    },
+})
+vim.lsp.enable("gopls")
+
+-- LSP config for ty
+vim.lsp.config("ty", {
+    capabilities = capabilities,
+    settings = {
+        ty = {
+            inlayHints = {
+                variableTypes = true,
+                callArgumentNames = true,
+            },
+        },
+    },
+})
+vim.lsp.enable("ty")
+
+-- LSP config for rust-analyzer
+vim.lsp.config("rust_analyzer", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("rust_analyzer")
+
 -- coc auto install extensions
 vim.g.coc_global_extensions = {
 	'coc-json',
 	'coc-sh',
-	'coc-pyright',
 	'coc-zig',
 	'coc-cmake',
 	'coc-java',
 	'coc-tsserver',
 	'coc-html',
 	'coc-clangd',
-	'coc-go',
-	'coc-rust-analyzer',
 }
 
 -- setup left side columm
@@ -132,17 +177,20 @@ vim.api.nvim_create_autocmd('FileType', {
 
 
 -- install treesitter parsers
-require('nvim-treesitter').install{
-    'python',
-    'yaml',
-    'hyprlang',
-    'javascript',
-    'go',
-    'latex',
-    'lua',
-    'toml',
-    'zsh',
-}
+require('tree-sitter-manager').setup({
+    ensure_installed = {
+        "python",
+        "yaml",
+        "hyprlang",
+        "javascript",
+        "go",
+        "latex",
+        "lua",
+        "toml",
+        "zsh",
+        "cpp",
+    },
+})
 
 -- sidebar git change indicators
 require('gitsigns').setup({
@@ -184,6 +232,57 @@ require("dropbar").setup({
 	}
 })
 --]]
+
+-- nvim-cmp setup
+local cmp = require('cmp')
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.snippet.expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<Down>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback() -- Moves cursor down normally if menu is closed
+            end
+        end, { "i", "s" }),
+
+        ["<Up>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback() -- Moves cursor up normally if menu is closed
+            end
+        end, { "i", "s" }),
+        -- Scroll documentation window with mouse wheel
+        ["<ScrollWheelUp>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(-1) -- Scrolls up 1 line
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<ScrollWheelDown>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(1) -- Scrolls down 1 line
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+    }, {
+        { name = "buffer" },
+    }),
+})
 
 -- autocomplete
 function _G.check_back_space()
