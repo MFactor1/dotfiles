@@ -23,9 +23,6 @@ Plug('romus204/tree-sitter-manager.nvim')
 
 vim.call('plug#end')
 
--- import the selected theme selection (this can change based on setup options)
-require('selected-theme')
-
 vim.g.mapleader = " "
 vim.g.vimtex_mappings_prefix = "\\"
 vim.g.vimtex_view_method = "general"
@@ -321,3 +318,7 @@ vim.cmd('match EoLSpace /\\s\\+$/')
 vim.g.vimtex_quickfix_ignore_filters = {
   [[LaTeX Warning: You have requested release]],
 }
+
+-- import the selected theme selection (this can change based on setup options)
+require('selected-theme')
+
