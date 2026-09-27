@@ -316,3 +316,8 @@ vim.cmd('match EoLSpace /\\s\\+$/')
 --vim.cmd('highlight EoFNewline ctermbg=244 guibg=#5e3f53')
 --vim.cmd('match EoFNewline /^\\n\\%$/')
 
+-- silence vimtex version warnings
+-- If using Lua (init.lua)
+vim.g.vimtex_quickfix_ignore_filters = {
+  [[LaTeX Warning: You have requested release]],
+}
