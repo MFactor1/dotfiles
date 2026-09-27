@@ -41,6 +41,11 @@ irebase() {
 	git rebase -i HEAD~$1
 }
 
+
+glog() {
+	git log --oneline -$1
+}
+
 alias purge-repo='purge_repo_cache'
 alias cp='cp -r'
 alias scp='scp -r'
