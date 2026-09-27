@@ -307,6 +307,9 @@ keyset('n', '<leader>g', ':Telescope live_grep <CR>')
 keyset('n', '<leader>c', ':Telescope grep_string <CR>')
 keyset('n', '<leader>wq', ':wall <CR>:q <CR>') -- save and close all
 
+-- lsp keybinds
+keyset('n', '<leader>v', vim.diagnostic.open_float)
+
 -- trailing whitespace/newline highlighting
 vim.cmd('highlight EoLSpace ctermbg=244 guibg=#5e3f53')
 vim.cmd('match EoLSpace /\\s\\+$/')
