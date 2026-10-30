@@ -59,6 +59,7 @@ require("catppuccin").setup({
             enabled = true
         },
         cmp = true,
+		blink_pairs = true,
 	},
 })
 

@@ -21,6 +21,8 @@ Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('romus204/tree-sitter-manager.nvim')
 Plug('mrcjkb/rustaceanvim')
+Plug('saghen/blink.lib')
+Plug('saghen/blink.pairs', { ['tag'] = '*' })
 
 vim.call('plug#end')
 
@@ -167,6 +169,9 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+-- download blink prebuilt bins
+require('blink.pairs').download():pwait(60000)
+require('blink.pairs').setup()
 
 -- install treesitter parsers
 require('tree-sitter-manager').setup({
