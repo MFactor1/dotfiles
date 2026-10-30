@@ -20,6 +20,7 @@ Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('romus204/tree-sitter-manager.nvim')
+Plug('mrcjkb/rustaceanvim')
 
 vim.call('plug#end')
 
@@ -68,12 +69,6 @@ vim.lsp.config("ty", {
     },
 })
 vim.lsp.enable("ty")
-
--- LSP config for rust-analyzer
-vim.lsp.config("rust_analyzer", {
-    capabilities = capabilities,
-})
-vim.lsp.enable("rust_analyzer")
 
 -- coc auto install extensions
 vim.g.coc_global_extensions = {
