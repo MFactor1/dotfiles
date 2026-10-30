@@ -55,3 +55,6 @@ alias ll='eza --all --long --total-size'
 alias cd='z'
 alias grep='rg --no-ignore --hidden'
 alias tokei='tokei --sort code'
+
+# opencode
+export PATH=/home/matthewnesbitt/.opencode/bin:$PATH
